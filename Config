@@ -14,7 +14,7 @@ browser tab.
 This setup uses the following:
 
 ```
->GitStrap
+>NCKZ
 ```
 
 <a name="pagesandnav"></a>
@@ -34,7 +34,7 @@ Use the keyword 'GSBLOG' to place the link for a blog index.
 This setup uses the following:
 
 ```
->Readme.md Config Header Footer Example GSBLOG
+>GSBLOG
 ```
 
 ## 3. Theme
@@ -86,7 +86,7 @@ Where "Index" would be the blog index link name. This setup uses the following
 (where "Blog" is the link to the blog index and each blog file is listed on a
 new line or separated with a space as shown above):
 ```
->Blog
+>Home
 Using-The-Blog
 GitStrap-Dependencies
 The-Index-File
