@@ -127,7 +127,7 @@ ID](https://support.google.com/analytics/answer/1032385?hl=en) here, or set to
 This site uses:
 
 ```
->UA-76185171-2
+>UA-76185171-1
 ```
 
 ## 9. Disqus Blog Comments
@@ -143,7 +143,7 @@ set to `false` if its not used:
 This site uses:
 
 ```
->gitstrap
+>nckz
 ```
 
 ## 10. Pagination
