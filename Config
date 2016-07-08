@@ -34,7 +34,7 @@ Use the keyword 'GSBLOG' to place the link for a blog index.
 This setup uses the following:
 
 ```
->GSBLOG About
+>GSBLOG
 ```
 
 ## 3. Theme
@@ -59,7 +59,7 @@ header text set this option to false.
 This setup uses the following:
 
 ```
->Header
+>false
 ```
 
 ## 5. Footer
