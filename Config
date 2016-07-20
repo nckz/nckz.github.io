@@ -87,10 +87,7 @@ Where "Index" would be the blog index link name. This setup uses the following
 new line or separated with a space as shown above):
 ```
 >Home
-Using-The-Blog
-GitStrap-Dependencies
-The-Index-File
-Using-GitStrap-With-GitLab
+2016-07-20_GitLab_Runner_Setup.md
 ```
 
 ## 7. Code
