@@ -87,3 +87,34 @@ Or on your entire collection of VMs:
 $ shrinkVM ./vmware/
 ```
 
+# Linux Guests
+According to [Time
+sinker](http://timesinker.blogspot.com/2011/01/shrinking-linux-virtual-disks-on-osx.html)
+guest OS's other than windows can't be auto-cleaned because files that have
+been removed (i.e. unlinked) still exist on the virtual disk and must be zeroed
+out before shrinking.  Therefore it is necessary to run:
+```bash
+sudo cat /dev/zero > zero; sync; sleep 1; sudo rm zero
+```
+If you're doing this often you may want to alias this:
+```bash
+function zerofs {
+    sudo time cat /dev/zero > zero; sync; sleep 1; sudo rm zero
+}
+```
+
+## Ubuntu Guests
+[Time
+sinker](http://timesinker.blogspot.com/2011/01/shrinking-linux-virtual-disks-on-osx.html)
+also suggests that you clean up any unneeded packages by running (ala [Ubuntu
+Geek](http://www.ubuntugeek.com/cleaning-up-a-ubuntu-gnulinux-system-updated-with-ubuntu-14-10-and-more-tools-added.html):
+```bash
+$ sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
+```
+If you're doing this often you may want to alias this:
+```bash
+function cleanfs{
+    sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
+    zerofs
+}
+```
