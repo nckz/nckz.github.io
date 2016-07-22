@@ -5,6 +5,20 @@ Author: Nicholas Zwart
 Summary: A .bashrc function for automating the defragmenting and shrinking of VMs.
 )))
 
+# The Platform Used Here
+The platform used in this work is:
+1. OSX 10.11.5
+2. GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)
+3. Version 8.1.1 (3771013)
+
+The `PATH` environment contains the `VMware Fusion.app` tools i.e.:
+```bash
+VMWARE="/Applications/VMware Fusion.app/Contents/Library"
+PATH="$VMWARE:$PATH"
+```
+
+# Bash Function for Shrinking VMDKs
+
 Add the following function to your ~/.bashrc:
 ```bash
 # VMWARE
@@ -72,3 +86,4 @@ Or on your entire collection of VMs:
 ```bash
 $ shrinkVM ./vmware/
 ```
+
