@@ -92,4 +92,7 @@ https://gitlab.com/ci/lint I was able to determine that file globbing must be
 done with a regex `/^\*.zip$/`.
 
 
+### ssh keys
+Deploy keys: http://docs.gitlab.com/ce/ci/ssh_keys/README.html
+key gen: https://gitlab.com/help/ssh/README
 
