@@ -106,8 +106,8 @@ function zerofs {
 ## Ubuntu Guests
 [Time
 sinker](http://timesinker.blogspot.com/2011/01/shrinking-linux-virtual-disks-on-osx.html)
-also suggests that you clean up any unneeded packages by running (ala [Ubuntu
-Geek](http://www.ubuntugeek.com/cleaning-up-a-ubuntu-gnulinux-system-updated-with-ubuntu-14-10-and-more-tools-added.html):
+also suggests that you clean up any unneeded packages by running (a la [Ubuntu
+Geek](http://www.ubuntugeek.com/cleaning-up-a-ubuntu-gnulinux-system-updated-with-ubuntu-14-10-and-more-tools-added.html)):
 ```bash
 $ sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
 ```
