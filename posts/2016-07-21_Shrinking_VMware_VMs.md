@@ -118,3 +118,15 @@ function cleanfs{
     zerofs
 }
 ```
+
+# Windows 7 Guests
+The VMware Tools installed on the guest also seem to have some shrink utils
+that can be run in the guest itself -nice if you are only running vmplayer on
+the host (see
+[ServerFault](http://serverfault.com/questions/356681/vmplayer-virtual-disk-shrinking-compacting-defragmenting)).
+
+```bash
+$ cd "C:\Program Files\VMWare\VMTools"
+$ VMwareToolboxCmd.exe disk list # see what disks can be shrunk
+$ VMwareToolboxCmd.exe disk shrink c:\\
+```
