@@ -96,3 +96,7 @@ done with a regex `/^\*.zip$/`.
 Deploy keys: http://docs.gitlab.com/ce/ci/ssh_keys/README.html
 key gen: https://gitlab.com/help/ssh/README
 
+VMware-Player-12.1.1-3770994.x86_64.bundle
+VMware-VIX-1.15.0-2985596.x86_64.bundle
+VMware-VIX-1.15.3-3770994.x86_64.bundle
+

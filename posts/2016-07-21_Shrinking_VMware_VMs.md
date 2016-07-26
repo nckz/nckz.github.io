@@ -5,11 +5,15 @@ Author: Nicholas Zwart
 Summary: A .bashrc function for automating the defragmenting and shrinking of VMs.
 )))
 
+This is a little summary of the disk tools I like to use when working with
+VMware VMs.  Most of the time I'm using an OSX host to serve OSX, Linux, and
+Windows guests so most of these instruction are based on using OSX as the host.
+
 # The Platform Used Here
 The platform used in this work is:
 1. OSX 10.11.5
 2. GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)
-3. Version 8.1.1 (3771013)
+3. VMware Fusion Version 8.1.1 (3771013)
 
 The `PATH` environment contains the `VMware Fusion.app` tools i.e.:
 ```bash
@@ -115,7 +119,7 @@ If you're doing this often you may want to alias this:
 ```bash
 function cleanfs{
     sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
-    zerofs
+    zerofs # from the 'Linux Guests' section above
 }
 ```
 
