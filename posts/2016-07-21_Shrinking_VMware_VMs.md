@@ -130,7 +130,7 @@ the host (see
 [ServerFault](http://serverfault.com/questions/356681/vmplayer-virtual-disk-shrinking-compacting-defragmenting)).
 
 ```bash
-$ cd "C:\Program Files\VMWare\VMTools"
+$ cd "C:\Program Files\VMWare\VMware Tools"
 $ VMwareToolboxCmd.exe disk list # see what disks can be shrunk
 $ VMwareToolboxCmd.exe disk shrink c:\\
 ```
