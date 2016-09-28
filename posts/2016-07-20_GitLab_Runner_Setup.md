@@ -80,9 +80,9 @@ The `gitlab-ci-multi-runner` command can install itself as a service, however,
 this service will be unable to access UI elements.  If those are necessary
 for say testing pipelines, then you'll have to set the gitlab-runner to launch
 as a scheduled task
-(https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/1046).
+(see [gitlab issue 1046](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/1046)).
 
-The following steps where modified from (http://www.greytrix.com/blogs/sageaccpacerp/2013/08/20/auto-execution-of-exe-file-using-windows-scheduler-in-sage-300-erp/):
+The following steps where modified from [some sage install guide](http://www.greytrix.com/blogs/sageaccpacerp/2013/08/20/auto-execution-of-exe-file-using-windows-scheduler-in-sage-300-erp/):
 * Navigate to Start >> Control Panel >> Administrative Tools >> Task Scheduler
 * Click on Task Scheduler >> Create Task option
 
@@ -131,9 +131,8 @@ Switched artifacts to `\*.zip` and the correct build branch.
 
 After commiting the yaml file, I opened the 'Pipelines' to find that the yaml
 was invalid due to some unrecognized character. Using the yaml validator at
-https://gitlab.com/ci/lint I was able to determine that file globbing must be
-done with a regex `/^\*.zip$/`.
-
+[https://gitlab.com/ci/lint](https://gitlab.com/ci/lint) I was able to
+determine that file globbing must be done with a regex `/^\*.zip$/`.
 
 ### ssh keys
 Deploy keys: http://docs.gitlab.com/ce/ci/ssh_keys/README.html
