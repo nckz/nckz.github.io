@@ -86,11 +86,13 @@ The following steps where modified from [some sage install guide](http://www.gre
 * Navigate to Start >> Control Panel >> Administrative Tools >> Task Scheduler
 * Click on Task Scheduler >> Create Task option
 
+```
 General Tab:
     Name: gitlab_runner_startup
     Run only When user is logged in: x
     Run with the highest privileges: x
     Configure For: <your windows version>
+```
 
 * Then navigate to Action tab and select New.
 * ‘New Action’ UI will get opened.
@@ -102,10 +104,12 @@ General Tab:
 * Click on OK >> ‘New Action’ UI will get closed.
 * Now, navigate to Triggers Tab >> New >> ‘New Trigger’; an UI will get opened.
 
+```
     Begin the task: At log on
     Specific user: <your intended user>
     Delay task for: <whatever time your extra components need to boot>
     Enabled: x
+```
 
 * Make sure the selected user is going to be auto-logged in.
 * Click on OK >> New Trigger UI will get closed.
