@@ -75,6 +75,49 @@ Which returns something like:
 root      4355  0.1  0.3  60016 13352 ?        Ssl  10:45   0:01 /usr/bin/gitlab-ci-multi-runner run --working-directory /home/gitlab-runner --config /etc/gitlab-runner/config.toml --service gitlab-runner --syslog --user gitlab-runner
 ```
 
+### Windows
+The `gitlab-ci-multi-runner` command can install itself as a service, however,
+this service will be unable to access UI elements.  If those are necessary
+for say testing pipelines, then you'll have to set the gitlab-runner to launch
+as a scheduled task
+(https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/1046).
+
+The following steps where modified from (http://www.greytrix.com/blogs/sageaccpacerp/2013/08/20/auto-execution-of-exe-file-using-windows-scheduler-in-sage-300-erp/):
+* Navigate to Start >> Control Panel >> Administrative Tools >> Task Scheduler
+* Click on Task Scheduler >> Create Task option
+
+General Tab:
+    Name: gitlab_runner_startup
+    Run only When user is logged in: x
+    Run with the highest privileges: x
+    Configure For: <your windows version>
+
+* Then navigate to Action tab and select New.
+* ‘New Action’ UI will get opened.
+* In ‘Program/Script’ select ‘EXE’ file, for which you want to run using Browse
+  button.
+* In ‘Add arguments (optional)’ field, enter 'run'
+* In the "Start in (optional)" field, enter the location of the 'config.toml'
+  file that was used to setup the runner.
+* Click on OK >> ‘New Action’ UI will get closed.
+* Now, navigate to Triggers Tab >> New >> ‘New Trigger’; an UI will get opened.
+
+    Begin the task: At log on
+    Specific user: <your intended user>
+    Delay task for: <whatever time your extra components need to boot>
+    Enabled: x
+
+* Make sure the selected user is going to be auto-logged in.
+* Click on OK >> New Trigger UI will get closed.
+* Now click on OK button in ‘Create Task’ UI.
+
+#### Save the Schedule as an XML File
+* Find the 'gitlab_runner_startup' task in the 'Active Tasks' section and
+  double click it. -this will open the 'Actions' menu to the right.
+* Click on the 'Export' feature to save the scheduled task for porting to other
+  VMs or as a backup.
+* Click 'Run' to test your task.
+
 ### 2. Add the .gitlab-ci.yml to the Project Repo
 On the project homepage click the 'Set Up CI' button to add a template
 `.gitlab-ci.yml` file to the root directory of the project.  For this, I chose
