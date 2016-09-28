@@ -116,8 +116,8 @@ General Tab:
 * Now click on OK button in ‘Create Task’ UI.
 
 #### Save the Schedule as an XML File
-* Find the 'gitlab_runner_startup' task in the 'Active Tasks' section and
-  double click it. -this will open the 'Actions' menu to the right.
+* Find the `gitlab_runner_startup` task in the 'Active Tasks' section and
+  double click it. This will open the 'Actions' menu to the right.
 * Click on the 'Export' feature to save the scheduled task for porting to other
   VMs or as a backup.
 * Click 'Run' to test your task.
