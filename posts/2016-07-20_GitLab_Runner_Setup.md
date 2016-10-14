@@ -5,17 +5,28 @@ Author: Nicholas Zwart
 Summary: Quick notes on setting up a Gitlab Runner.
 )))
 
-# Linux 
 
 ## Summary
 This setup is for a virtual machine running Ubuntu 64bit (15.10, headless) in
-conjuction with the cloud version of gitlab using their free 'coordinator'.
+conjunction with the cloud version of gitlab using their free 'coordinator'.
 The virtual machine is behind a firewall and runs on a host with VM-Workstation
 Player 12 running Ubuntu 64bit (12.04, headless).
+
+This also covers the installation on Windows 7 64bit for a single user GUI
+mode that allows the gitlab-runner access to start GUI software for build or
+test pipelines.
+
+### Software Required
+* VMware-Player-12.1.1-3770994.x86_64.bundle
+* VMware-VIX-1.15.0-2985596.x86_64.bundle
+* VMware-VIX-1.15.3-3770994.x86_64.bundle
+* Git (or Git-Bash for Windows)
 
 ## Steps
 
 ### 1. Install Gitlab Runner on the VM
+
+#### Linux 
 From the instructions on
 [gitlab.com](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-repository.md),
 run the following commands:
@@ -75,7 +86,7 @@ Which returns something like:
 root      4355  0.1  0.3  60016 13352 ?        Ssl  10:45   0:01 /usr/bin/gitlab-ci-multi-runner run --working-directory /home/gitlab-runner --config /etc/gitlab-runner/config.toml --service gitlab-runner --syslog --user gitlab-runner
 ```
 
-### Windows
+#### Windows
 The `gitlab-ci-multi-runner` command can install itself as a service, however,
 this service will be unable to access UI elements.  If those are necessary
 for say testing pipelines, then you'll have to set the gitlab-runner to launch
@@ -115,7 +126,7 @@ General Tab:
 * Click on OK >> New Trigger UI will get closed.
 * Now click on OK button in ‘Create Task’ UI.
 
-#### Save the Schedule as an XML File
+##### Save the Schedule as an XML File
 * Find the `gitlab_runner_startup` task in the 'Active Tasks' section and
   double click it. This will open the 'Actions' menu to the right.
 * Click on the 'Export' feature to save the scheduled task for porting to other
@@ -138,11 +149,9 @@ was invalid due to some unrecognized character. Using the yaml validator at
 [https://gitlab.com/ci/lint](https://gitlab.com/ci/lint) I was able to
 determine that file globbing must be done with a regex `/^\*.zip$/`.
 
-### ssh keys
-Deploy keys: http://docs.gitlab.com/ce/ci/ssh_keys/README.html
-key gen: https://gitlab.com/help/ssh/README
+### 3. Add ssh Keys
+You'll need to use what GitLab refers to as a "deploy key" which allows read
+only access to a specific project.
 
-VMware-Player-12.1.1-3770994.x86_64.bundle
-VMware-VIX-1.15.0-2985596.x86_64.bundle
-VMware-VIX-1.15.3-3770994.x86_64.bundle
-
+* Deploy keys: http://docs.gitlab.com/ce/ci/ssh_keys/README.html
+* key gen: https://gitlab.com/help/ssh/README
