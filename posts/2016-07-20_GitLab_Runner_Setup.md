@@ -96,11 +96,11 @@ General Tab:
 
 * Then navigate to Action tab and select New.
 * ‘New Action’ UI will get opened.
-* In ‘Program/Script’ select ‘EXE’ file, for which you want to run using Browse
-  button.
-* In ‘Add arguments (optional)’ field, enter 'run'
-* In the "Start in (optional)" field, enter the location of the 'config.toml'
-  file that was used to setup the runner.
+* In ‘Program/Script’ select the gitlab-runner ‘EXE’ file, for that you want to
+  run using 'Browse' button.
+* In ‘Add arguments (optional)’ field, enter `run`
+* In the "Start in (optional)" field, enter the path that holds the
+  `config.toml` file that was used to setup the runner.
 * Click on OK >> ‘New Action’ UI will get closed.
 * Now, navigate to Triggers Tab >> New >> ‘New Trigger’; an UI will get opened.
 
