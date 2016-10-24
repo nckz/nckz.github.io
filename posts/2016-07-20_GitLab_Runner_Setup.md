@@ -123,6 +123,7 @@ General Tab:
 ```
 
 * Make sure the selected user is going to be auto-logged in.
+ * Also check that the [AutoLoginCount](http://windowsitpro.com/systems-management/how-can-i-set-number-times-autologon-executes) is set to a large number .
 * Click on OK >> New Trigger UI will get closed.
 * Now click on OK button in ‘Create Task’ UI.
 
