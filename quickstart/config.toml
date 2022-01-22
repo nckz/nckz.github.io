@@ -1,0 +1,4 @@
+baseURL = 'http://nckz.github.io/'
+languageCode = 'en-us'
+title = 'Toughiculties'
+theme = "ananke"
