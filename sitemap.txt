@@ -1,3 +1,7 @@
+https://nckz.github.io/?sitemap=true
+https://nckz.github.io/?page=Home
+https://nckz.github.io/?post=2016-07-20GitLabRunnerSetup.md
+https://nckz.github.io/?post=2016-07-21ShrinkingVMwareVMs.md
 http://nckz.github.io/GitStrap/?sitemap=true
 http://nckz.github.io/GitStrap/?page=Readme.md
 http://nckz.github.io/GitStrap/?page=Config
