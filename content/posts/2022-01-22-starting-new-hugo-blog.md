@@ -1,7 +1,7 @@
 ---
 title: "Hugo Blog"
 date: 2022-01-22T22:38:35-05:00
-author: Big Datum
+author: Nicholas Zwart
 summary: a short howto for starting Hugo on GitHub
 ---
 
