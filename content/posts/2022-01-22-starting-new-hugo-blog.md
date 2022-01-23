@@ -183,3 +183,7 @@ or in the configs will then be made relative to `/images`.
 ## Ananke Theme Config
 For more configuration tips check out the
 [example config](https://github.com/theNewDynamic/gohugo-theme-ananke/blob/master/exampleSite/config.toml).
+
+## Favicon
+This was nice and easy; drag'n dropped a PNG onto the
+[favicon.io](https://favicon.io/) 'Image' page and got my 'favicon.ico' file.
