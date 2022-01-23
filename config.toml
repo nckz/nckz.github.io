@@ -4,3 +4,7 @@ title = 'Toughiculties'
 theme = "ananke"
 googleAnalytics = "UA-76185171-1"
 disqusShortname = "nckz"
+enableRobotsTXT = true
+
+[params]
+  featured_image = "/images/hht.jpg"
