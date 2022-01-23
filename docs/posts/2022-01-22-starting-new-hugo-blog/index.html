@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Starting New Hugo Blog | Toughiculties</title>
+    <title>Hugo Blog | Toughiculties</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="a short howto for making this blog">
     <meta name="generator" content="Hugo 0.92.0" />
@@ -27,19 +27,19 @@
 
     
     
-    <meta property="og:title" content="Starting New Hugo Blog" />
+    <meta property="og:title" content="Hugo Blog" />
 <meta property="og:description" content="a short howto for making this blog" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughiculties.com/posts/2022-01-22-starting-new-hugo-blog/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-22T22:38:35-05:00" />
 <meta property="article:modified_time" content="2022-01-22T22:38:35-05:00" />
 
-<meta itemprop="name" content="Starting New Hugo Blog">
+<meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for making this blog"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="112">
+<meta itemprop="wordCount" content="312">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Starting New Hugo Blog"/>
+<meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for making this blog"/>
 
 	
@@ -102,7 +102,7 @@
   </div>
 
 
-      <h1 class="f1 athelas mt3 mb1">Starting New Hugo Blog</h1>
+      <h1 class="f1 athelas mt3 mb1">Hugo Blog</h1>
       
       <p class="tracked">
           By <strong>
@@ -131,17 +131,61 @@ tools.</p>
 and installed the tools with brew:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install hugo
 hugo version
-</code></pre></div><blockquote>
-<p>hugo v0.92.0+extended darwin/amd64 BuildDate=unknown</p>
-</blockquote>
-<p>I decided to use the &lsquo;docs&rsquo; directory to publish to on github; for some reason
+&gt; hugo v0.92.0+extended darwin/amd64 BuildDate<span style="color:#f92672">=</span>unknown
+</code></pre></div><p>I decided to use the &lsquo;docs&rsquo; directory to publish to on github; for some reason
 github only offers two options</p>
 <ul>
 <li><code>/ (root)</code></li>
 <li><code>/docs</code></li>
 </ul>
 <p>It feels cleaner to publish to an output directory.</p>
-<ul class="pa0">
+<h2 id="build-site-and-serve">build-site and serve</h2>
+<p>The instructions call for building and testing the site with the commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># to build</span>
+hugo -d ./docs
+git add docs
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># to start a local server on localhost:1313</span>
+hugo server
+</code></pre></div><p>I like to ensure that the commands are run from the correct directory (in this
+case its the project-root directory).  So I rolled these commands into bash
+scripts:</p>
+<p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/build-site">build-site</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+
+DOCS_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;docs&#34;</span>
+TGT_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>DOCS_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+
+cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+hugo -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TGT_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+git add <span style="color:#e6db74">${</span>DOCS_DIR<span style="color:#e6db74">}</span>
+</code></pre></div><p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/build-site">serve</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+
+cd <span style="color:#e6db74">&#34;</span>$PROJECT_ROOT<span style="color:#e6db74">&#34;</span>
+hugo server
+</code></pre></div><h2 id="new-post">new-post</h2>
+<p>The method for starting a new post also requires some memory; you have to
+invoke the &lsquo;new&rsquo; sub-command and the content org structure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new content/posts/&lt;post-name&gt;.md
+</code></pre></div><p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/new-post">new-post</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">POST_SLUG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+
+SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+
+NOW<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%Y-%m-%d&#34;</span><span style="color:#66d9ef">)</span>
+TGT_POST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;content/posts/</span>$NOW<span style="color:#e6db74">-</span>$POST_SLUG<span style="color:#e6db74">.md&#34;</span>
+
+cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+hugo new -v <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TGT_POST<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>This script automates the prefix, date and file extention to reduce the barrier
+for starting new posts.  It takes one argument for the base filename.  The
+verbose switch is used to remind you where to find the files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/new-post hugo-blog
+&gt; Content <span style="color:#e6db74">&#34;/Users/nick/src/nckz.github.io/content/posts/2022-01-22-hugo-blog.md&#34;</span> created
+</code></pre></div><ul class="pa0">
   
 </ul>
 <div class="mt6 instapaper_ignoref">
