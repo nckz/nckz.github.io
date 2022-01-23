@@ -37,7 +37,7 @@
 <meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="688">
+<meta itemprop="wordCount" content="698">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
@@ -152,9 +152,10 @@ github only offers two options</p>
 <li><code>/docs</code></li>
 </ul>
 <p>It feels cleaner to publish to an output directory.</p>
-<p>NOTE: don&rsquo;t forget to <code>touch .nojekyll &amp; git add .nojekyll</code> in the root
-directory; this will prevent the github action from trying to run jekyll.
-As described in this
+<p>NOTE: don&rsquo;t forget to</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch .nojekyll &amp; git add .nojekyll
+</code></pre></div><p>in the root directory; this will prevent the GitHub Action from trying to run
+jekyll (This can reduce the build time to a few seconds). As described in this
 <a href="https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/">post</a>
 it must be placed in the document root.</p>
 <h2 id="build-site-and-serve">build-site and serve</h2>
