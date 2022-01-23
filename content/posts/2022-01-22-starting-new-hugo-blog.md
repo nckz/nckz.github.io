@@ -158,3 +158,8 @@ I had to add `HUGO_ENV=production` to my build command.
 The layout is automatically taken up and added on the next build. This can be
 verified by viewing the 'Realtime' stats in
 [Google Analytics](https://analytics.google.com).
+
+## .gitignore
+It's important to know which files are not necessary to track; there seems to
+be consensus around the `resources/_gen` directory (see
+[example](https://gist.github.com/muhannad0/e78f14d7bfa2a1a48320ec7194e5c516)).
