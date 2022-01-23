@@ -11,8 +11,8 @@ enableRobotsTXT = true
   description = "Gotta keep figure'n..."
   text_color = ""
   author = "Nicholas Zwart"
-  favicon = ""
-  site_logo = ""
+  favicon = "/images/favicon.ico"
+  site_logo = "/images/sweat-smile.png"
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
   background_color_class = "bg-black"
   # recent_posts_number = 2
