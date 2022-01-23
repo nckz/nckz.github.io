@@ -37,7 +37,7 @@
 <meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="508">
+<meta itemprop="wordCount" content="521">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
@@ -140,7 +140,10 @@ github only offers two options</p>
 </ul>
 <p>It feels cleaner to publish to an output directory.</p>
 <p>NOTE: don&rsquo;t forget to <code>touch .nojekyll &amp; git add .nojekyll</code> in the root
-directory; this will prevent the github action from trying to run jekyll.</p>
+directory; this will prevent the github action from trying to run jekyll.
+As described in this
+<a href="https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/">post</a>
+it must be placed in the document root.</p>
 <h2 id="build-site-and-serve">build-site and serve</h2>
 <p>The instructions call for building and testing the site with the commands:</p>
 <ul>

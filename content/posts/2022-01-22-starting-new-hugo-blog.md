@@ -32,6 +32,9 @@ It feels cleaner to publish to an output directory.
 
 NOTE: don't forget to `touch .nojekyll & git add .nojekyll` in the root
 directory; this will prevent the github action from trying to run jekyll.
+As described in this
+[post](https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/)
+it must be placed in the document root.
 
 ## build-site and serve
 The instructions call for building and testing the site with the commands:
