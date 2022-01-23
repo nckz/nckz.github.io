@@ -17,8 +17,16 @@ SWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( dirname "$SWD" )"
 
 # github only allows the project root (/) or /docs
-TGT_DIR="${PROJECT_ROOT}/docs"
+DOCS_DIR="docs"
+TGT_DIR="${PROJECT_ROOT}/${DOCS_DIR}"
 
 
 ########################################################################## MAIN
+# make sure the command is run in project root
+cd "${PROJECT_ROOT}"
+
+# build and output into docs
 hugo -d "${TGT_DIR}"
+
+# remember to stage the new docs
+git add ${DOCS_DIR}

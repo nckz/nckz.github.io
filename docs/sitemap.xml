@@ -3,12 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://toughiculties.com/posts/</loc>
-    <lastmod>2016-07-21T19:16:00+00:00</lastmod>
+    <lastmod>2022-01-22T22:38:35-05:00</lastmod>
   </url><url>
-    <loc>https://toughiculties.com/posts/2016-07-21_shrinking_vmware_vms/</loc>
-    <lastmod>2016-07-21T19:16:00+00:00</lastmod>
+    <loc>https://toughiculties.com/posts/2022-01-22-starting-new-hugo-blog/</loc>
+    <lastmod>2022-01-22T22:38:35-05:00</lastmod>
   </url><url>
     <loc>https://toughiculties.com/</loc>
+    <lastmod>2022-01-22T22:38:35-05:00</lastmod>
+  </url><url>
+    <loc>https://toughiculties.com/posts/2016-07-21_shrinking_vmware_vms/</loc>
     <lastmod>2016-07-21T19:16:00+00:00</lastmod>
   </url><url>
     <loc>https://toughiculties.com/posts/2016-07-20_gitlab_runner_setup/</loc>
