@@ -147,3 +147,10 @@ to the `/docs` directory; this works automatically.
 
 Then I added my 'property id' to the
 [configuration file](https://gohugo.io/templates/internal/#google-analytics).
+I followed these
+[instructions](http://cloudywithachanceofdevops.com/posts/2018/05/17/setting-up-google-analytics-on-hugo/)
+to add the property to all headers in the theme.
+This required selecting the appropriate layout from theme and copying it to a
+local 'layout' directory. The layout is automatically taken up and added on the
+next build. This can be verified by viewing the 'Realtime' stats in
+[Google Analytics](https://analytics.google.com).

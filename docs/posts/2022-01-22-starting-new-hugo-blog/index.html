@@ -37,7 +37,7 @@
 <meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="568">
+<meta itemprop="wordCount" content="622">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
@@ -234,7 +234,14 @@ Google Analytics tracker over too.  First I copied the existing
 <a href="https://support.google.com/webmasters/answer/9008080?hl=en">site verification html file</a>
 to the <code>/docs</code> directory; this works automatically.</p>
 <p>Then I added my &lsquo;property id&rsquo; to the
-<a href="https://gohugo.io/templates/internal/#google-analytics">configuration file</a>.</p>
+<a href="https://gohugo.io/templates/internal/#google-analytics">configuration file</a>.
+I followed these
+<a href="http://cloudywithachanceofdevops.com/posts/2018/05/17/setting-up-google-analytics-on-hugo/">instructions</a>
+to add the property to all headers in the theme.
+This required selecting the appropriate layout from theme and copying it to a
+local &lsquo;layout&rsquo; directory. The layout is automatically taken up and added on the
+next build. This can be verified by viewing the &lsquo;Realtime&rsquo; stats in
+<a href="https://analytics.google.com">Google Analytics</a>.</p>
 <ul class="pa0">
   
 </ul>
