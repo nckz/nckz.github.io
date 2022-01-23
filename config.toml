@@ -7,7 +7,7 @@ disqusShortname = "nckz"
 enableRobotsTXT = true
 
 [params]
-  featured_image = "/images/hht.png"
+  featured_image = "/images/banner.png"
   description = "Gotta keep figure'n..."
   text_color = ""
   author = "Nicholas Zwart"

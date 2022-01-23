@@ -175,3 +175,11 @@ the existing layout.
 It's important to know which files are not necessary to track; there seems to
 be consensus around the `resources/_gen` directory (see
 [example](https://gist.github.com/muhannad0/e78f14d7bfa2a1a48320ec7194e5c516)).
+
+## Images
+Make a directory 'images' under the 'static' directory; image refs in the posts
+or in the configs will then be made relative to `/images`.
+
+## Ananke Theme Config
+For more configuration tips check out the
+[example config](https://github.com/theNewDynamic/gohugo-theme-ananke/blob/master/exampleSite/config.toml).
