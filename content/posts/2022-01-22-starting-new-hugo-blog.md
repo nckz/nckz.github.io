@@ -141,16 +141,20 @@ checks are green, the site will be ready to preen.
 # Additions
 Since I moved my blog from a previous setup
 ([GitStrap](https://github.com/nckz/GitStrap)); I wanted to move the
-Google Analytics tracker over too.  First I copied the existing
+Google Analytics tracker and Disqus comments over too.
+
+## Google Analytics
+First I copied the existing
 [site verification html file](https://support.google.com/webmasters/answer/9008080?hl=en)
 to the `/docs` directory; this works automatically.
 
 Then I added my 'property id' to the
 [configuration file](https://gohugo.io/templates/internal/#google-analytics).
-I followed these
-[instructions](http://cloudywithachanceofdevops.com/posts/2018/05/17/setting-up-google-analytics-on-hugo/)
-to add the property to all headers in the theme.
-This required selecting the appropriate layout from theme and copying it to a
-local 'layout' directory. The layout is automatically taken up and added on the
-next build. This can be verified by viewing the 'Realtime' stats in
+I'm using the [Ananke](https://github.com/theNewDynamic/gohugo-theme-ananke#readme)
+theme so the instructions for enabling addons can be found her in the
+[Production](https://github.com/theNewDynamic/gohugo-theme-ananke#production) section.
+I had to add `HUGO_ENV=production` to my build command.
+
+The layout is automatically taken up and added on the next build. This can be
+verified by viewing the 'Realtime' stats in
 [Google Analytics](https://analytics.google.com).

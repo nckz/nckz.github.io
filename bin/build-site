@@ -26,7 +26,9 @@ TGT_DIR="${PROJECT_ROOT}/${DOCS_DIR}"
 cd "${PROJECT_ROOT}"
 
 # build and output into docs
-hugo -d "${TGT_DIR}"
+# the 'production' var must be set as per:
+#  - https://github.com/theNewDynamic/gohugo-theme-ananke#production
+HUGO_ENV=production hugo -d "${TGT_DIR}"
 
 # remember to stage the new docs
 git add ${DOCS_DIR}

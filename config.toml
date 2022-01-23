@@ -2,4 +2,5 @@ baseURL = 'https://toughiculties.com/'
 languageCode = 'en-us'
 title = 'Toughiculties'
 theme = "ananke"
-googleAnalytics = "UA-76185171-2"
+googleAnalytics = "UA-76185171-1"
+disqusShortname = "nckz"

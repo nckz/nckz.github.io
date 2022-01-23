@@ -10,11 +10,11 @@
     <meta name="generator" content="Hugo 0.92.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
     
 
     
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
+<link rel="stylesheet" href="/ananke/css/main.min.8c3c6b7a5c2939095415214adc9c949a8391e746355c9ac53bc9674d2ee97c31.css" >
 
 
 
@@ -37,28 +37,28 @@
 <meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="622">
+<meta itemprop="wordCount" content="625">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
 
-	
+      
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-76185171-2', 'auto');
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-76185171-1', 'auto');
 	
 	ga('send', 'pageview');
 }
 </script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
+	
   </head>
 
-  <body class="ma0 avenir bg-near-white">
+  <body class="ma0 avenir bg-near-white production">
 
     
    
@@ -230,22 +230,45 @@ checks are green, the site will be ready to preen.</p>
 <h1 id="additions">Additions</h1>
 <p>Since I moved my blog from a previous setup
 (<a href="https://github.com/nckz/GitStrap">GitStrap</a>); I wanted to move the
-Google Analytics tracker over too.  First I copied the existing
+Google Analytics tracker and Disqus comments over too.</p>
+<h2 id="google-analytics">Google Analytics</h2>
+<p>First I copied the existing
 <a href="https://support.google.com/webmasters/answer/9008080?hl=en">site verification html file</a>
 to the <code>/docs</code> directory; this works automatically.</p>
 <p>Then I added my &lsquo;property id&rsquo; to the
 <a href="https://gohugo.io/templates/internal/#google-analytics">configuration file</a>.
-I followed these
-<a href="http://cloudywithachanceofdevops.com/posts/2018/05/17/setting-up-google-analytics-on-hugo/">instructions</a>
-to add the property to all headers in the theme.
-This required selecting the appropriate layout from theme and copying it to a
-local &lsquo;layout&rsquo; directory. The layout is automatically taken up and added on the
-next build. This can be verified by viewing the &lsquo;Realtime&rsquo; stats in
+I&rsquo;m using the <a href="https://github.com/theNewDynamic/gohugo-theme-ananke#readme">Ananke</a>
+theme so the instructions for enabling addons can be found her in the
+<a href="https://github.com/theNewDynamic/gohugo-theme-ananke#production">Production</a> section.
+I had to add <code>HUGO_ENV=production</code> to my build command.</p>
+<p>The layout is automatically taken up and added on the next build. This can be
+verified by viewing the &lsquo;Realtime&rsquo; stats in
 <a href="https://analytics.google.com">Google Analytics</a>.</p>
 <ul class="pa0">
   
 </ul>
 <div class="mt6 instapaper_ignoref">
+      
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nckz" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
       
       </div>
