@@ -3,6 +3,7 @@ title: GitLab Runner Setup
 date: 2016-07-20T10:46:00
 author: Nicholas Zwart
 summary: Quick notes on setting up a Gitlab Runner.
+featured_image: https://about.gitlab.com/images/press/logo/wm.svg
 ---
 
 ## Summary

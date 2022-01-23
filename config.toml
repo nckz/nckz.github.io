@@ -7,4 +7,12 @@ disqusShortname = "nckz"
 enableRobotsTXT = true
 
 [params]
-  featured_image = "/images/hht.jpg"
+  featured_image = "/images/hht.png"
+  description = "Gotta keep figure'n..."
+  text_color = ""
+  author = "Nicholas Zwart"
+  favicon = ""
+  site_logo = ""
+  # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
+  background_color_class = "bg-black"
+  # recent_posts_number = 2
