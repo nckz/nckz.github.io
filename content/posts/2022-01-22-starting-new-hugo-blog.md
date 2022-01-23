@@ -136,4 +136,4 @@ box which will automatically requisition a certificate from
 
 This can all take a while (minutes/hours) before the automated checks embedded
 in the GitHub `Settings->Pages` menu will allow you to proceed.  When all
-checks are green, the site will be read to preen.
+checks are green, the site will be ready to preen.
