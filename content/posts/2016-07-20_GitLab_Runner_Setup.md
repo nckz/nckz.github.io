@@ -1,10 +1,9 @@
-(((
-Title: GitLab Runner Setup
-Date: 2016-07-20 10:46:00
-Author: Nicholas Zwart
-Summary: Quick notes on setting up a Gitlab Runner.
-)))
-
+---
+title: GitLab Runner Setup
+date: 2016-07-20T10:46:00
+author: Nicholas Zwart
+summary: Quick notes on setting up a Gitlab Runner.
+---
 
 ## Summary
 This setup is for a virtual machine running Ubuntu 64bit (15.10, headless) in

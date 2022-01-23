@@ -1,9 +1,9 @@
-(((
-Title: Shrinking VMware VMs with Fusion
-Date: 2016-07-21 19:16:00
-Author: Nicholas Zwart
-Summary: A .bashrc function for automating the defragmenting and shrinking of VMs.
-)))
+---
+title: Shrinking VMware VMs with Fusion
+date: 2016-07-21 19:16:00
+author: Nicholas Zwart
+summary: A .bashrc function for automating the defragmenting and shrinking of VMs.
+---
 
 This is a little summary of the disk tools I like to use when working with
 VMware VMs.  Most of the time I'm using an OSX host to serve OSX, Linux, and
