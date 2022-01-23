@@ -137,3 +137,13 @@ box which will automatically requisition a certificate from
 This can all take a while (minutes/hours) before the automated checks embedded
 in the GitHub `Settings->Pages` menu will allow you to proceed.  When all
 checks are green, the site will be ready to preen.
+
+# Additions
+Since I moved my blog from a previous setup
+([GitStrap](https://github.com/nckz/GitStrap)); I wanted to move the
+Google Analytics tracker over too.  First I copied the existing
+[site verification html file](https://support.google.com/webmasters/answer/9008080?hl=en)
+to the `/docs` directory; this works automatically.
+
+Then I added my 'property id' to the
+[configuration file](https://gohugo.io/templates/internal/#google-analytics).
