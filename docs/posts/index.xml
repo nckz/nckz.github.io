@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Toughiculties</title>
-    <link>http://nckz.github.io/posts/</link>
+    <link>https://toughiculties.com/posts/</link>
     <description>Recent content in Posts on Toughiculties</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jan 2022 19:26:04 -0500</lastBuildDate><atom:link href="http://nckz.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Jan 2022 19:26:04 -0500</lastBuildDate><atom:link href="https://toughiculties.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
-      <link>http://nckz.github.io/posts/my-first-post/</link>
+      <link>https://toughiculties.com/posts/my-first-post/</link>
       <pubDate>Sat, 22 Jan 2022 19:26:04 -0500</pubDate>
       
-      <guid>http://nckz.github.io/posts/my-first-post/</guid>
+      <guid>https://toughiculties.com/posts/my-first-post/</guid>
       <description></description>
     </item>
     
