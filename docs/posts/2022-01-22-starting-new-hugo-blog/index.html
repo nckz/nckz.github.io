@@ -37,7 +37,7 @@
 <meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="521">
+<meta itemprop="wordCount" content="568">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
@@ -214,6 +214,14 @@ box which will automatically requisition a certificate from
 <p>This can all take a while (minutes/hours) before the automated checks embedded
 in the GitHub <code>Settings-&gt;Pages</code> menu will allow you to proceed.  When all
 checks are green, the site will be ready to preen.</p>
+<h1 id="additions">Additions</h1>
+<p>Since I moved my blog from a previous setup
+(<a href="https://github.com/nckz/GitStrap">GitStrap</a>); I wanted to move the
+Google Analytics tracker over too.  First I copied the existing
+<a href="https://support.google.com/webmasters/answer/9008080?hl=en">site verification html file</a>
+to the <code>/docs</code> directory; this works automatically.</p>
+<p>Then I added my &lsquo;property id&rsquo; to the
+<a href="https://gohugo.io/templates/internal/#google-analytics">configuration file</a>.</p>
 <ul class="pa0">
   
 </ul>
