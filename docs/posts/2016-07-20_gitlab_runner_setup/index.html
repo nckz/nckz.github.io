@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>GitLab Runner Setup | Toughiculties</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Quick notes on setting up a Gitlab Runner.">
+    <meta name="generator" content="Hugo 0.92.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="GitLab Runner Setup" />
+<meta property="og:description" content="Quick notes on setting up a Gitlab Runner." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughiculties.com/posts/2016-07-20_gitlab_runner_setup/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-07-20T10:46:00+00:00" />
+<meta property="article:modified_time" content="2016-07-20T10:46:00+00:00" />
+
+<meta itemprop="name" content="GitLab Runner Setup">
+<meta itemprop="description" content="Quick notes on setting up a Gitlab Runner."><meta itemprop="datePublished" content="2016-07-20T10:46:00+00:00" />
+<meta itemprop="dateModified" content="2016-07-20T10:46:00+00:00" />
+<meta itemprop="wordCount" content="786">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GitLab Runner Setup"/>
+<meta name="twitter:description" content="Quick notes on setting up a Gitlab Runner."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Toughiculties
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">GitLab Runner Setup</h1>
+      
+      <p class="tracked">
+          By <strong>
+          
+              Nicholas Zwart
+          
+          </strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2016-07-20T10:46:00Z">July 20, 2016</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="summary">Summary</h2>
+<p>This setup is for a virtual machine running Ubuntu 64bit (15.10, headless) in
+conjunction with the cloud version of gitlab using their free &lsquo;coordinator&rsquo;.
+The virtual machine is behind a firewall and runs on a host with VM-Workstation
+Player 12 running Ubuntu 64bit (12.04, headless).</p>
+<p>This also covers the installation on Windows 7 64bit for a single user GUI
+mode that allows the gitlab-runner access to start GUI software for build or
+test pipelines.</p>
+<h3 id="software-required">Software Required</h3>
+<ul>
+<li>VMware-Player-12.1.1-3770994.x86_64.bundle</li>
+<li>VMware-VIX-1.15.0-2985596.x86_64.bundle</li>
+<li>VMware-VIX-1.15.3-3770994.x86_64.bundle</li>
+<li>Git (or Git-Bash for Windows)</li>
+</ul>
+<h2 id="steps">Steps</h2>
+<h3 id="1-install-gitlab-runner-on-the-vm">1. Install Gitlab Runner on the VM</h3>
+<h4 id="linux">Linux</h4>
+<p>From the instructions on
+<a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-repository.md">gitlab.com</a>,
+run the following commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash
+sudo apt-get install gitlab-ci-multi-runner
+sudo gitlab-ci-multi-runner register
+</code></pre></div><p>The runner registration info can be found on under the &lsquo;runners&rsquo; tab from in
+the desired project:</p>
+<pre tabindex="0"><code>https://gitlab.com/&lt;group&gt;/&lt;repo&gt;/runners
+</code></pre><p>The &lsquo;Shared runners&rsquo; option was disabled since they likely don&rsquo;t have the
+specific requirements for this build, which are maintained internally.</p>
+<p>This basically says to enter the free CI &lsquo;coordinator&rsquo; URL:</p>
+<pre tabindex="0"><code>Specify the following URL during runner setup: 
+https://gitlab.com/ci
+</code></pre><p>Use the following registration token during setup:</p>
+<pre tabindex="0"><code>&lt;some alpha numeric token to copy and paste&gt;
+</code></pre><p>The next questions are for identification of the runner (from the web
+interface) and some tags that explain what the runner is good for.  In this
+case, its for a GPI node compilation:</p>
+<pre tabindex="0"><code>Please enter the gitlab-ci description for this runner:
+[gpilab]: ubuntu64
+Please enter the gitlab-ci tags for this runner (comma separated):
+gpi,python3
+</code></pre><p>Since the compilation is not very complicated I assumed a shell environment
+would be sufficient for this -since I hadn&rsquo;t built the script yet.</p>
+<pre tabindex="0"><code>Please enter the executor: ssh, virtualbox, docker+machine, docker-ssh+machine, docker, docker-ssh, parallels, shell:
+shell
+
+...
+
+The runner should be auto-started.
+</code></pre><p>This can be verified with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ps aux | grep gitlab-runner
+</code></pre></div><p>Which returns something like:</p>
+<pre tabindex="0"><code>root      4355  0.1  0.3  60016 13352 ?        Ssl  10:45   0:01 /usr/bin/gitlab-ci-multi-runner run --working-directory /home/gitlab-runner --config /etc/gitlab-runner/config.toml --service gitlab-runner --syslog --user gitlab-runner
+</code></pre><h4 id="windows">Windows</h4>
+<p>The <code>gitlab-ci-multi-runner</code> command can install itself as a service, however,
+this service will be unable to access UI elements.  If those are necessary
+for say testing pipelines, then you&rsquo;ll have to set the gitlab-runner to launch
+as a scheduled task
+(see <a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/1046">gitlab issue 1046</a>).</p>
+<p>The following steps where modified from <a href="http://www.greytrix.com/blogs/sageaccpacerp/2013/08/20/auto-execution-of-exe-file-using-windows-scheduler-in-sage-300-erp/">some sage install guide</a>:</p>
+<ul>
+<li>Navigate to Start &raquo; Control Panel &raquo; Administrative Tools &raquo; Task Scheduler</li>
+<li>Click on Task Scheduler &raquo; Create Task option</li>
+</ul>
+<pre tabindex="0"><code>General Tab:
+    Name: gitlab_runner_startup
+    Run only When user is logged in: x
+    Run with the highest privileges: x
+    Configure For: &lt;your windows version&gt;
+</code></pre><ul>
+<li>Then navigate to Action tab and select New.</li>
+<li>‘New Action’ UI will get opened.</li>
+<li>In ‘Program/Script’ select the gitlab-runner ‘EXE’ file, for that you want to
+run using &lsquo;Browse&rsquo; button.</li>
+<li>In ‘Add arguments (optional)’ field, enter <code>run</code></li>
+<li>In the &ldquo;Start in (optional)&rdquo; field, enter the path that holds the
+<code>config.toml</code> file that was used to setup the runner.</li>
+<li>Click on OK &raquo; ‘New Action’ UI will get closed.</li>
+<li>Now, navigate to Triggers Tab &raquo; New &raquo; ‘New Trigger’; an UI will get opened.</li>
+</ul>
+<pre tabindex="0"><code>    Begin the task: At log on
+    Specific user: &lt;your intended user&gt;
+    Delay task for: &lt;whatever time your extra components need to boot&gt;
+    Enabled: x
+</code></pre><ul>
+<li>Make sure the selected user is going to be auto-logged in.</li>
+<li>Also check that the <a href="http://windowsitpro.com/systems-management/how-can-i-set-number-times-autologon-executes">AutoLoginCount</a> is set to a large number .</li>
+<li>Click on OK &raquo; New Trigger UI will get closed.</li>
+<li>Now click on OK button in ‘Create Task’ UI.</li>
+</ul>
+<h5 id="save-the-schedule-as-an-xml-file">Save the Schedule as an XML File</h5>
+<ul>
+<li>Find the <code>gitlab_runner_startup</code> task in the &lsquo;Active Tasks&rsquo; section and
+double click it. This will open the &lsquo;Actions&rsquo; menu to the right.</li>
+<li>Click on the &lsquo;Export&rsquo; feature to save the scheduled task for porting to other
+VMs or as a backup.</li>
+<li>Click &lsquo;Run&rsquo; to test your task.</li>
+</ul>
+<h3 id="2-add-the-gitlab-ciyml-to-the-project-repo">2. Add the .gitlab-ci.yml to the Project Repo</h3>
+<p>On the project homepage click the &lsquo;Set Up CI&rsquo; button to add a template
+<code>.gitlab-ci.yml</code> file to the root directory of the project.  For this, I chose
+the Nanoc template since it seemed like a good start.</p>
+<p>Changed the job name to the GPI node that was being built and pointed the
+<code>script:</code> tag to the packaging script that is contained in the root dir of the
+repo with reference to the <a href="http://docs.gitlab.com/ce/ci/yaml/README.html#image-and-services">GitLab Runner
+Docs</a>.
+Switched artifacts to <code>\*.zip</code> and the correct build branch.</p>
+<p>After commiting the yaml file, I opened the &lsquo;Pipelines&rsquo; to find that the yaml
+was invalid due to some unrecognized character. Using the yaml validator at
+<a href="https://gitlab.com/ci/lint">https://gitlab.com/ci/lint</a> I was able to
+determine that file globbing must be done with a regex <code>/^\*.zip$/</code>.</p>
+<h3 id="3-add-ssh-keys">3. Add ssh Keys</h3>
+<p>You&rsquo;ll need to use what GitLab refers to as a &ldquo;deploy key&rdquo; which allows read
+only access to a specific project.</p>
+<ul>
+<li>Deploy keys: <a href="http://docs.gitlab.com/ce/ci/ssh_keys/README.html">http://docs.gitlab.com/ce/ci/ssh_keys/README.html</a></li>
+<li>key gen: <a href="https://gitlab.com/help/ssh/README">https://gitlab.com/help/ssh/README</a></li>
+</ul>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://toughiculties.com/" >
+    &copy;  Toughiculties 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div></div>
+  </div>
+</footer>
+
+  </body>
+</html>

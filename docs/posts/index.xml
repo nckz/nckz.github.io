@@ -6,14 +6,23 @@
     <description>Recent content in Posts on Toughiculties</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jan 2022 19:26:04 -0500</lastBuildDate><atom:link href="https://toughiculties.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Jul 2016 19:16:00 +0000</lastBuildDate><atom:link href="https://toughiculties.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>https://toughiculties.com/posts/my-first-post/</link>
-      <pubDate>Sat, 22 Jan 2022 19:26:04 -0500</pubDate>
+      <title>Shrinking VMware VMs with Fusion</title>
+      <link>https://toughiculties.com/posts/2016-07-21_shrinking_vmware_vms/</link>
+      <pubDate>Thu, 21 Jul 2016 19:16:00 +0000</pubDate>
       
-      <guid>https://toughiculties.com/posts/my-first-post/</guid>
-      <description></description>
+      <guid>https://toughiculties.com/posts/2016-07-21_shrinking_vmware_vms/</guid>
+      <description>A .bashrc function for automating the defragmenting and shrinking of VMs.</description>
+    </item>
+    
+    <item>
+      <title>GitLab Runner Setup</title>
+      <link>https://toughiculties.com/posts/2016-07-20_gitlab_runner_setup/</link>
+      <pubDate>Wed, 20 Jul 2016 10:46:00 +0000</pubDate>
+      
+      <guid>https://toughiculties.com/posts/2016-07-20_gitlab_runner_setup/</guid>
+      <description>Quick notes on setting up a Gitlab Runner.</description>
     </item>
     
   </channel>
