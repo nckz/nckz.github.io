@@ -1,0 +1,24 @@
+#!/bin/bash
+# Author: Nick Zwart
+# Date: 2022jan22
+# Brief: The build command specific to github-pages dir structure
+
+
+######################################################################## STRICT
+# strict mode settings
+set -euo pipefail
+IFS=$'\n\t'
+
+
+########################################################################## PATH
+# get the path to THIS script
+SWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# the root directory for this project, usually the VCS repo directory
+PROJECT_ROOT="$( dirname "$SWD" )"
+
+# github only allows the project root (/) or /docs
+TGT_DIR="${PROJECT_ROOT}/docs"
+
+
+########################################################################## MAIN
+hugo -d "${TGT_DIR}"
