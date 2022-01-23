@@ -6,7 +6,7 @@
     
     <title>Hugo Blog | Toughiculties</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="a short howto for making this blog">
+    <meta name="description" content="a short howto for starting Hugo on GitHub">
     <meta name="generator" content="Hugo 0.92.0" />
     
     
@@ -28,19 +28,19 @@
     
     
     <meta property="og:title" content="Hugo Blog" />
-<meta property="og:description" content="a short howto for making this blog" />
+<meta property="og:description" content="a short howto for starting Hugo on GitHub" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughiculties.com/posts/2022-01-22-starting-new-hugo-blog/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-22T22:38:35-05:00" />
 <meta property="article:modified_time" content="2022-01-22T22:38:35-05:00" />
 
 <meta itemprop="name" content="Hugo Blog">
-<meta itemprop="description" content="a short howto for making this blog"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
+<meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="312">
+<meta itemprop="wordCount" content="508">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
-<meta name="twitter:description" content="a short howto for making this blog"/>
+<meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
 
 	
   </head>
@@ -139,13 +139,19 @@ github only offers two options</p>
 <li><code>/docs</code></li>
 </ul>
 <p>It feels cleaner to publish to an output directory.</p>
+<p>NOTE: don&rsquo;t forget to <code>touch .nojekyll &amp; git add .nojekyll</code> in the root
+directory; this will prevent the github action from trying to run jekyll.</p>
 <h2 id="build-site-and-serve">build-site and serve</h2>
 <p>The instructions call for building and testing the site with the commands:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># to build</span>
-hugo -d ./docs
+<ul>
+<li>to build</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo -d ./docs
 git add docs
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># to start a local server on localhost:1313</span>
-hugo server
+</code></pre></div><ul>
+<li>to start a local server on localhost:1313</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo server
 </code></pre></div><p>I like to ensure that the commands are run from the correct directory (in this
 case its the project-root directory).  So I rolled these commands into bash
 scripts:</p>
@@ -185,7 +191,27 @@ for starting new posts.  It takes one argument for the base filename.  The
 verbose switch is used to remind you where to find the files.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/new-post hugo-blog
 &gt; Content <span style="color:#e6db74">&#34;/Users/nick/src/nckz.github.io/content/posts/2022-01-22-hugo-blog.md&#34;</span> created
-</code></pre></div><ul class="pa0">
+</code></pre></div><h1 id="finalize">Finalize</h1>
+<p>There are a few other instructions (not listed here) that deal with theme-ing
+and configuration.  The things that caused more time than necessary were the
+new instructions on linking DNS and setting up HTTPS in GitHub.</p>
+<p>From the GitHub <code>Settings-&gt;Pages</code> menu, in the target repository, you can
+automatically enter the CNAME in a UI field which will write a file in your
+repo at the location that corresponds with your site&rsquo;s root, e.g.:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat docs/CNAME
+&gt;toughiculties.com
+</code></pre></div><p>You&rsquo;ll have to make an A record with one of the IP addresses listed here:
+<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain">Managing a custom domain&hellip;</a>.</p>
+<p>It&rsquo;s also important to make sure that all configured urls have &lsquo;HTTPS&rsquo; i.e.
+the main configuration file
+<a href="https://github.com/nckz/nckz.github.io/blob/hugo/config.toml">config.toml</a>.</p>
+<p>When this is all in order; you&rsquo;ll have the option to check the &lsquo;Enforce HTTPS&rsquo;
+box which will automatically requisition a certificate from
+<a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.</p>
+<p>This can all take a while (minutes/hours) before the automated checks embedded
+in the GitHub <code>Settings-&gt;Pages</code> menu will allow you to proceed.  When all
+checks are green, the site will be read to preen.</p>
+<ul class="pa0">
   
 </ul>
 <div class="mt6 instapaper_ignoref">

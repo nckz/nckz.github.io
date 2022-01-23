@@ -2,7 +2,7 @@
 title: "Hugo Blog"
 date: 2022-01-22T22:38:35-05:00
 author: Big Datum
-summary: a short howto for making this blog
+summary: a short howto for starting Hugo on GitHub
 ---
 
 I'm looking for the quickest way to start a blog and the easiest blogging tool
@@ -30,17 +30,22 @@ github only offers two options
 
 It feels cleaner to publish to an output directory.
 
+NOTE: don't forget to `touch .nojekyll & git add .nojekyll` in the root
+directory; this will prevent the github action from trying to run jekyll.
+
 ## build-site and serve
 The instructions call for building and testing the site with the commands:
 
+* to build
+
 ```bash
-# to build
 hugo -d ./docs
 git add docs
 ```
 
+* to start a local server on localhost:1313
+
 ```bash
-# to start a local server on localhost:1313
 hugo server
 ```
 
@@ -100,3 +105,32 @@ verbose switch is used to remind you where to find the files.
 ./bin/new-post hugo-blog
 > Content "/Users/nick/src/nckz.github.io/content/posts/2022-01-22-hugo-blog.md" created
 ```
+
+# Finalize
+There are a few other instructions (not listed here) that deal with theme-ing
+and configuration.  The things that caused more time than necessary were the
+new instructions on linking DNS and setting up HTTPS in GitHub.
+
+From the GitHub `Settings->Pages` menu, in the target repository, you can
+automatically enter the CNAME in a UI field which will write a file in your
+repo at the location that corresponds with your site's root, e.g.:
+
+```bash
+cat docs/CNAME
+>toughiculties.com
+```
+
+You'll have to make an A record with one of the IP addresses listed here:
+[Managing a custom domain...](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain).
+
+It's also important to make sure that all configured urls have 'HTTPS' i.e.
+the main configuration file
+[config.toml](https://github.com/nckz/nckz.github.io/blob/hugo/config.toml).
+
+When this is all in order; you'll have the option to check the 'Enforce HTTPS'
+box which will automatically requisition a certificate from
+[Let's Encrypt](https://letsencrypt.org/).
+
+This can all take a while (minutes/hours) before the automated checks embedded
+in the GitHub `Settings->Pages` menu will allow you to proceed.  When all
+checks are green, the site will be read to preen.
