@@ -37,7 +37,7 @@
 <meta itemprop="name" content="Hugo Blog">
 <meta itemprop="description" content="a short howto for starting Hugo on GitHub"><meta itemprop="datePublished" content="2022-01-22T22:38:35-05:00" />
 <meta itemprop="dateModified" content="2022-01-22T22:38:35-05:00" />
-<meta itemprop="wordCount" content="648">
+<meta itemprop="wordCount" content="688">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo Blog"/>
 <meta name="twitter:description" content="a short howto for starting Hugo on GitHub"/>
@@ -244,6 +244,12 @@ I had to add <code>HUGO_ENV=production</code> to my build command.</p>
 <p>The layout is automatically taken up and added on the next build. This can be
 verified by viewing the &lsquo;Realtime&rsquo; stats in
 <a href="https://analytics.google.com">Google Analytics</a>.</p>
+<h2 id="disqus-comments">Disqus Comments</h2>
+<p>This was an easy addition; just add the shortname to the config as shown in
+<a href="https://gohugo.io/templates/internal/#configure-disqus">Configure Discuss</a>.
+The <a href="https://github.com/theNewDynamic/gohugo-theme-ananke#readme">Ananke</a> theme
+already has these tags builtin to the layout so there is no need to modify
+the existing layout.</p>
 <h2 id="gitignore">.gitignore</h2>
 <p>It&rsquo;s important to know which files are not necessary to track; there seems to
 be consensus around the <code>resources/_gen</code> directory (see

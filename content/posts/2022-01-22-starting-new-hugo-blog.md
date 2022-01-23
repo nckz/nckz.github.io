@@ -159,6 +159,13 @@ The layout is automatically taken up and added on the next build. This can be
 verified by viewing the 'Realtime' stats in
 [Google Analytics](https://analytics.google.com).
 
+## Disqus Comments
+This was an easy addition; just add the shortname to the config as shown in
+[Configure Discuss](https://gohugo.io/templates/internal/#configure-disqus).
+The [Ananke](https://github.com/theNewDynamic/gohugo-theme-ananke#readme) theme
+already has these tags builtin to the layout so there is no need to modify
+the existing layout.
+
 ## .gitignore
 It's important to know which files are not necessary to track; there seems to
 be consensus around the `resources/_gen` directory (see
