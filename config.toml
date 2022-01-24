@@ -14,11 +14,11 @@ Paginate = 10
 
 [params]
   featured_image = "/images/banner.png"
-  description = "I hear what you're saying and I still don't understand."
+  description = "gee-whiz, now what?!"
   text_color = "gray"
   author = "Nicholas Zwart"
   favicon = "/images/favicon.ico"
-  site_logo = "/images/favicon-32x32.png"
+  # site_logo = "/images/favicon-32x32.png"
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
   background_color_class = "bg-black"
   # recent_posts_number = 2
