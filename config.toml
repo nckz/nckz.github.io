@@ -1,18 +1,24 @@
-baseURL = 'https://toughiculties.com/'
-languageCode = 'en-us'
 title = 'Toughiculties'
-theme = "ananke"
+baseURL = 'https://toughiculties.com/'
+
 googleAnalytics = "UA-76185171-1"
 disqusShortname = "nckz"
 enableRobotsTXT = true
 
+theme = "ananke"
+languageCode = 'en-us'
+DefaultContentLanguage = "en"
+# SectionPagesMenu = "main"
+Paginate = 10
+
+
 [params]
   featured_image = "/images/banner.png"
-  description = "Gotta keep figure'n..."
-  text_color = ""
+  description = "I hear what you're saying and I still don't understand."
+  text_color = "gray"
   author = "Nicholas Zwart"
   favicon = "/images/favicon.ico"
-  site_logo = "/images/sweat-smile.png"
+  site_logo = "/images/favicon-32x32.png"
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
   background_color_class = "bg-black"
   # recent_posts_number = 2

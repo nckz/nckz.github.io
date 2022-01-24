@@ -1,3 +1,7 @@
 [submodule "themes/ananke"]
 	path = themes/ananke
 	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "themes/dwmkerr.com/themes/dwmkerr_hugo_theme_pickles"]
+	path = themes/dwmkerr.com/themes/dwmkerr_hugo_theme_pickles
+	url = git@github.com:dwmkerr/hugo_theme_pickles.git
+	branch = release
