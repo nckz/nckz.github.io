@@ -108,6 +108,21 @@ function zerofs {
 }
 ```
 
+NOTE: This is a simple way to zero the file system if you have enough disk
+space on the host OS to hold the entire VM when the disk is fully expanded with
+zeros. If not, you can follow these nifty instructions
+[Shrinking VirtualBox Linux images with ZeroFree](https://snippets.khromov.se/shrinking-a-virtualbox-linux-image-with-zerofree/).
+
+I had to keep a copy of Ubuntu to boot into and use apt-get to install
+zerofree. I set VMware to boot via CD/DVD, selected Try Ubuntu (this
+was 20.04). Then ran `fdisk -l` to list available devices; I chose `sda5`:
+
+```bash
+zerofree -v /dev/sda5
+```
+
+Then proceeded to use the shrink script.
+
 ## Ubuntu Guests
 [Time
 sinker](http://timesinker.blogspot.com/2011/01/shrinking-linux-virtual-disks-on-osx.html)
