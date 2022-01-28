@@ -5,3 +5,9 @@
 	path = themes/dwmkerr.com/themes/dwmkerr_hugo_theme_pickles
 	url = git@github.com:dwmkerr/hugo_theme_pickles.git
 	branch = release
+[submodule "themes/bookworm-light"]
+	path = themes/bookworm-light
+	url = https://github.com/gethugothemes/bookworm-light.git
+[submodule "themes/hugo-paper"]
+	path = themes/hugo-paper
+	url = https://github.com/nanxiaobei/hugo-paper.git

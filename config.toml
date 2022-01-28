@@ -5,7 +5,10 @@ googleAnalytics = "UA-76185171-1"
 disqusShortname = "nckz"
 enableRobotsTXT = true
 
-theme = "ananke"
+github = 'nckz'
+
+# theme = "ananke"
+theme = "hugo-paper"
 languageCode = 'en-us'
 DefaultContentLanguage = "en"
 # SectionPagesMenu = "main"
@@ -14,7 +17,7 @@ Paginate = 10
 
 [params]
   featured_image = "/images/banner.png"
-  description = "gee-whiz, now what?!"
+  description = "This is what I did."
   text_color = "gray"
   author = "Nicholas Zwart"
   favicon = "/images/favicon.ico"
