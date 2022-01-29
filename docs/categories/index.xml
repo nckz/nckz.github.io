@@ -5,6 +5,7 @@
     <link>https://toughiculties.com/categories/</link>
     <description>Recent content in Categories on Toughiculties</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://toughiculties.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <copyright>Copyright © 2016–2022, Nicholas Zwart; all rights reserved.</copyright><atom:link href="https://toughiculties.com/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

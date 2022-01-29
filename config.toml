@@ -1,27 +1,40 @@
+# see: https://github.com/nanxiaobei/hugo-paper/blob/main/exampleSite/config.toml
+
 title = 'Toughiculties'
 baseURL = 'https://toughiculties.com/'
+
+author = "Nicholas Zwart"
+copyright = "Copyright © 2016–2022, Nicholas Zwart; all rights reserved."
+
+paginate = 5
+
+languageCode = 'en'
+DefaultContentLanguage = "en"
+enableInlineShortcodes = true
+
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors = ["error-remote-getjson"]
 
 googleAnalytics = "UA-76185171-1"
 disqusShortname = "nckz"
 enableRobotsTXT = true
 
-github = 'nckz'
-
-# theme = "ananke"
 theme = "hugo-paper"
-languageCode = 'en-us'
-DefaultContentLanguage = "en"
-# SectionPagesMenu = "main"
-Paginate = 10
 
+# [menu]
+#  [[menu.main]]
+#    identifier = "about"
+#    name = "About"
+#    url = "/about/"
+#    weight = 10
 
 [params]
-  featured_image = "/images/banner.png"
-  description = "This is what I did."
-  text_color = "gray"
-  author = "Nicholas Zwart"
-  favicon = "/images/favicon.ico"
-  # site_logo = "/images/favicon-32x32.png"
-  # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
-  background_color_class = "bg-black"
-  # recent_posts_number = 2
+  github = "nckz"
+  # twitter = ""
+  # instagram = ""
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
