@@ -105,7 +105,7 @@ if (!doNotTrack) {
   <meta itemprop="name" content="PyScript; Scientific Edge Computing Soon">
 <meta itemprop="description" content="Some examples of PyScript implementations running Python client-side."><meta itemprop="datePublished" content="2022-09-10T23:53:20+00:00" />
 <meta itemprop="dateModified" content="2022-09-10T23:53:20+00:00" />
-<meta itemprop="wordCount" content="775">
+<meta itemprop="wordCount" content="848">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -442,12 +442,24 @@ sure why I can&rsquo;t reproduce it now.</p>
 <p>It wasn&rsquo;t obvious to me that successive py-script runs will execute code in the
 same interpreter scope/session. This means that care should be taken when naming
 variables and definitions within each script.  For example, the <code>plot</code> command
-was renamed in each script i.e.:</p>
+(defined in the examples above) was renamed in each script i.e.:</p>
 <ul>
 <li><code>plot_matplotlib</code> in <a href="https://github.com/nckz/nckz.github.io/blob/hugo/layouts/shortcodes/pyscript_pandas_app.html">pyscript_pandas_app.html</a></li>
 <li><code>plot_plotly</code> in <a href="https://github.com/nckz/nckz.github.io/blob/hugo/layouts/shortcodes/pyscript_pandas_plotly_app.html">pyscript_pandas_plotly_app.html</a></li>
 </ul>
 <p>I suppose this should&rsquo;ve been expected since the page is the scope.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Overall this was really fun to work with.  As others have noted, the loading
+time is much slower than folks would come to expect.  PyScript now shows a
+loading spinner so that your users won&rsquo;t get confused about the delay in page
+loading, as shown in the screenshot below.</p>
+<p><img src="/images/pyscript_loading.png" alt="loading"></p>
+<p>Each stage of loading is updated in the text below the spinner:</p>
+<ul>
+<li>Loading runtime&hellip;</li>
+<li>Runtime created&hellip;</li>
+<li>Initializing components&hellip;</li>
+</ul>
 </section>
 
   
