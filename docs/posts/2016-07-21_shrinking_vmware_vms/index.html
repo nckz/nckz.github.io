@@ -56,7 +56,7 @@
   <link rel="apple-touch-icon" href="https://toughiculties.com/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.1" />
+  <meta name="generator" content="Hugo 0.101.0" />
 
   
   
@@ -105,7 +105,7 @@ if (!doNotTrack) {
   <meta itemprop="name" content="Shrinking VMware VMs with Fusion">
 <meta itemprop="description" content="A .bashrc function for automating the defragmenting and shrinking of VMs."><meta itemprop="datePublished" content="2016-07-21T19:16:00+00:00" />
 <meta itemprop="dateModified" content="2016-07-21T19:16:00+00:00" />
-<meta itemprop="wordCount" content="552">
+<meta itemprop="wordCount" content="555">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -184,105 +184,105 @@ Windows guests so most of these instruction are based on using OSX as the host.<
 <li>VMware Fusion Version 8.1.1 (3771013)</li>
 </ol>
 <p>The <code>PATH</code> environment contains the <code>VMware Fusion.app</code> tools i.e.:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">VMWARE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/Applications/VMware Fusion.app/Contents/Library&#34;</span>
-PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$VMWARE<span style="color:#e6db74">:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</code></pre></div><h1 id="bash-function-for-shrinking-vmdks">Bash Function for Shrinking VMDKs</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>VMWARE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/Applications/VMware Fusion.app/Contents/Library&#34;</span>
+</span></span><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$VMWARE<span style="color:#e6db74">:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><h1 id="bash-function-for-shrinking-vmdks">Bash Function for Shrinking VMDKs</h1>
 <p>Add the following function to your ~/.bashrc:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># VMWARE</span>
-<span style="color:#75715e"># assumes the PATH is setup</span>
-<span style="color:#66d9ef">function</span> shrinkVM <span style="color:#f92672">{</span>
-
-    <span style="color:#75715e"># path to vmware tool</span>
-    VDISKMAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vmware-vdiskmanager&#34;</span>
-
-    <span style="color:#75715e"># find all vmx files</span>
-    VMX<span style="color:#f92672">=()</span>
-    <span style="color:#66d9ef">for</span> name in <span style="color:#66d9ef">$(</span>find $1 -iname <span style="color:#e6db74">&#34;*.vmx&#34;</span><span style="color:#66d9ef">)</span>
-    <span style="color:#66d9ef">do</span>
-        VMX<span style="color:#f92672">+=(</span>$name<span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">done</span>
-
-    <span style="color:#75715e"># find all vmdk files</span>
-    VMDK<span style="color:#f92672">=()</span>
-    <span style="color:#66d9ef">for</span> name in <span style="color:#e6db74">${</span>VMX[@]<span style="color:#e6db74">}</span>
-    <span style="color:#66d9ef">do</span>
-        <span style="color:#75715e"># get the current vmdk list from the vmx file</span>
-        IFS_backup<span style="color:#f92672">=</span>$IFS
-        IFS<span style="color:#f92672">=</span><span style="color:#e6db74">$&#39;\n&#39;</span>
-        VMDK_sub<span style="color:#f92672">=(</span><span style="color:#66d9ef">$(</span>grep -o <span style="color:#e6db74">&#34;\&#34;.*\.vmdk\&#34;&#34;</span> $name<span style="color:#66d9ef">)</span><span style="color:#f92672">)</span>
-        IFS<span style="color:#f92672">=</span>$IFS_backup
-
-        <span style="color:#75715e"># get the location of these disks</span>
-        VMDK_dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>dirname $name<span style="color:#66d9ef">)</span>
-
-        <span style="color:#75715e"># append the relative dirs to the listed disks</span>
-        <span style="color:#75715e">#for disk in ${VMDK_sub[@]}</span>
-        <span style="color:#66d9ef">for</span> <span style="color:#f92672">((</span>i<span style="color:#f92672">=</span>0; i&lt;<span style="color:#e6db74">${#</span>VMDK_sub[@]<span style="color:#e6db74">}</span>; i++<span style="color:#f92672">))</span>;
-        <span style="color:#66d9ef">do</span>
-            disk<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>VMDK_sub[$i]<span style="color:#e6db74">}</span>
-            disk<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>disk%<span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e"># remove suffix &#34;</span>
-            disk<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>disk#<span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e"># remove prefix &#34;</span>
-            disk<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> echo <span style="color:#e6db74">&#34;</span>$disk<span style="color:#e6db74">&#34;</span> | sed <span style="color:#e6db74">&#39;s/ /\\ /g&#39;</span> <span style="color:#66d9ef">)</span> <span style="color:#75715e"># deref spaces</span>
-            VMDK<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>VMDK_dir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>disk<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
-        <span style="color:#66d9ef">done</span>
-    <span style="color:#66d9ef">done</span>
-
-    time <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">for</span> <span style="color:#f92672">((</span>i<span style="color:#f92672">=</span>0; i&lt;<span style="color:#e6db74">${#</span>VMDK[@]<span style="color:#e6db74">}</span>; i++<span style="color:#f92672">))</span>;
-        <span style="color:#66d9ef">do</span>
-            CMD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$VDISKMAN<span style="color:#e6db74"> -d </span><span style="color:#e6db74">${</span>VMDK[$i]<span style="color:#e6db74">}</span><span style="color:#e6db74"> &amp;&amp; </span>$VDISKMAN<span style="color:#e6db74"> -k </span><span style="color:#e6db74">${</span>VMDK[$i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-            echo $CMD
-            eval $CMD
-        <span style="color:#66d9ef">done</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Update your environment by
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># VMWARE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># assumes the PATH is setup</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> shrinkVM <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># path to vmware tool</span>
+</span></span><span style="display:flex;"><span>    VDISKMAN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vmware-vdiskmanager&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># find all vmx files</span>
+</span></span><span style="display:flex;"><span>    VMX<span style="color:#f92672">=()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> name in <span style="color:#66d9ef">$(</span>find $1 -iname <span style="color:#e6db74">&#34;*.vmx&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>        VMX<span style="color:#f92672">+=(</span>$name<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># find all vmdk files</span>
+</span></span><span style="display:flex;"><span>    VMDK<span style="color:#f92672">=()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> name in <span style="color:#e6db74">${</span>VMX[@]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># get the current vmdk list from the vmx file</span>
+</span></span><span style="display:flex;"><span>        IFS_backup<span style="color:#f92672">=</span>$IFS
+</span></span><span style="display:flex;"><span>        IFS<span style="color:#f92672">=</span><span style="color:#e6db74">$&#39;\n&#39;</span>
+</span></span><span style="display:flex;"><span>        VMDK_sub<span style="color:#f92672">=(</span><span style="color:#66d9ef">$(</span>grep -o <span style="color:#e6db74">&#34;\&#34;.*\.vmdk\&#34;&#34;</span> $name<span style="color:#66d9ef">)</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        IFS<span style="color:#f92672">=</span>$IFS_backup
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># get the location of these disks</span>
+</span></span><span style="display:flex;"><span>        VMDK_dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>dirname $name<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># append the relative dirs to the listed disks</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#for disk in ${VMDK_sub[@]}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">((</span>i<span style="color:#f92672">=</span>0; i&lt;<span style="color:#e6db74">${#</span>VMDK_sub[@]<span style="color:#e6db74">}</span>; i++<span style="color:#f92672">))</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>            disk<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>VMDK_sub[$i]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>            disk<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>disk%<span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e"># remove suffix &#34;</span>
+</span></span><span style="display:flex;"><span>            disk<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>disk#<span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e"># remove prefix &#34;</span>
+</span></span><span style="display:flex;"><span>            disk<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> echo <span style="color:#e6db74">&#34;</span>$disk<span style="color:#e6db74">&#34;</span> | sed <span style="color:#e6db74">&#39;s/ /\\ /g&#39;</span> <span style="color:#66d9ef">)</span> <span style="color:#75715e"># deref spaces</span>
+</span></span><span style="display:flex;"><span>            VMDK<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>VMDK_dir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>disk<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    time <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">((</span>i<span style="color:#f92672">=</span>0; i&lt;<span style="color:#e6db74">${#</span>VMDK[@]<span style="color:#e6db74">}</span>; i++<span style="color:#f92672">))</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>            CMD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$VDISKMAN<span style="color:#e6db74"> -d </span><span style="color:#e6db74">${</span>VMDK[$i]<span style="color:#e6db74">}</span><span style="color:#e6db74"> &amp;&amp; </span>$VDISKMAN<span style="color:#e6db74"> -k </span><span style="color:#e6db74">${</span>VMDK[$i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            echo $CMD
+</span></span><span style="display:flex;"><span>            eval $CMD
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Update your environment by
 executing:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ source .bashrc
-</code></pre></div><p>Now you can run <code>shrinkVM</code> on your VM directory:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ shrinkVM ./vmware/Ubuntu64.vmwarevm
-</code></pre></div><p>Or on your entire collection of VMs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ shrinkVM ./vmware/
-</code></pre></div><h1 id="linux-guests">Linux Guests</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ source .bashrc
+</span></span></code></pre></div><p>Now you can run <code>shrinkVM</code> on your VM directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ shrinkVM ./vmware/Ubuntu64.vmwarevm
+</span></span></code></pre></div><p>Or on your entire collection of VMs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ shrinkVM ./vmware/
+</span></span></code></pre></div><h1 id="linux-guests">Linux Guests</h1>
 <p>According to <a href="http://timesinker.blogspot.com/2011/01/shrinking-linux-virtual-disks-on-osx.html">Time
 sinker</a>
 guest OS&rsquo;s other than windows can&rsquo;t be auto-cleaned because files that have
 been removed (i.e. unlinked) still exist on the virtual disk and must be zeroed
 out before shrinking.  Therefore it is necessary to run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cat /dev/zero &gt; zero; sync; sleep 1; sudo rm zero
-</code></pre></div><p>If you&rsquo;re doing this often you may want to alias this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> zerofs <span style="color:#f92672">{</span>
-    sudo time cat /dev/zero &gt; zero; sync; sleep 1; sudo rm zero
-<span style="color:#f92672">}</span>
-</code></pre></div><p>NOTE: This is a simple way to zero the file system if you have enough disk
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo cat /dev/zero &gt; zero; sync; sleep 1; sudo rm zero
+</span></span></code></pre></div><p>If you&rsquo;re doing this often you may want to alias this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> zerofs <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    sudo time cat /dev/zero &gt; zero; sync; sleep 1; sudo rm zero
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>NOTE: This is a simple way to zero the file system if you have enough disk
 space on the host OS to hold the entire VM when the disk is fully expanded with
 zeros. If not, you can follow these nifty instructions
 <a href="https://snippets.khromov.se/shrinking-a-virtualbox-linux-image-with-zerofree/">Shrinking VirtualBox Linux images with ZeroFree</a>.</p>
 <p>I had to keep a copy of Ubuntu to boot into and use apt-get to install
 zerofree. I set VMware to boot via CD/DVD, selected Try Ubuntu (this
 was 20.04). Then ran <code>fdisk -l</code> to list available devices; I chose <code>sda5</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zerofree -v /dev/sda5
-</code></pre></div><p>Then proceeded to use the shrink script.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>zerofree -v /dev/sda5
+</span></span></code></pre></div><p>Then proceeded to use the shrink script.</p>
 <h2 id="ubuntu-guests">Ubuntu Guests</h2>
 <p><a href="http://timesinker.blogspot.com/2011/01/shrinking-linux-virtual-disks-on-osx.html">Time
 sinker</a>
 also suggests that you clean up any unneeded packages by running (a la <a href="http://www.ubuntugeek.com/cleaning-up-a-ubuntu-gnulinux-system-updated-with-ubuntu-14-10-and-more-tools-added.html">Ubuntu
 Geek</a>):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
-</code></pre></div><p>If you&rsquo;re doing this often you may want to alias this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> cleanfs<span style="color:#f92672">{</span>
-    sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
-    zerofs <span style="color:#75715e"># from the &#39;Linux Guests&#39; section above</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><h1 id="windows-7-guests">Windows 7 Guests</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
+</span></span></code></pre></div><p>If you&rsquo;re doing this often you may want to alias this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> cleanfs<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    sudo apt-get autoclean; sudo apt-get clean; sudo apt-get autoremove
+</span></span><span style="display:flex;"><span>    zerofs <span style="color:#75715e"># from the &#39;Linux Guests&#39; section above</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h1 id="windows-7-guests">Windows 7 Guests</h1>
 <p>The VMware Tools installed on the guest also seem to have some shrink utils
 that can be run in the guest itself -nice if you are only running vmplayer on
 the host (see
 <a href="http://serverfault.com/questions/356681/vmplayer-virtual-disk-shrinking-compacting-defragmenting">ServerFault</a>).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd <span style="color:#e6db74">&#34;C:\Program Files\VMWare\VMware Tools&#34;</span>
-$ VMwareToolboxCmd.exe disk list <span style="color:#75715e"># see what disks can be shrunk</span>
-$ VMwareToolboxCmd.exe disk shrink c:<span style="color:#ae81ff">\\</span>
-</code></pre></div></section>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd <span style="color:#e6db74">&#34;C:\Program Files\VMWare\VMware Tools&#34;</span>
+</span></span><span style="display:flex;"><span>$ VMwareToolboxCmd.exe disk list <span style="color:#75715e"># see what disks can be shrunk</span>
+</span></span><span style="display:flex;"><span>$ VMwareToolboxCmd.exe disk shrink c:<span style="color:#ae81ff">\\</span>
+</span></span></code></pre></div></section>
 
   
   

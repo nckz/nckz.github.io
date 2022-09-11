@@ -56,7 +56,7 @@
   <link rel="apple-touch-icon" href="https://toughiculties.com/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.1" />
+  <meta name="generator" content="Hugo 0.101.0" />
 
   
   
@@ -182,10 +182,10 @@ tools.</p>
 <h1 id="quickstart">Quickstart</h1>
 <p>I followed the <a href="https://gohugo.io/getting-started/quick-start/">quick-start guide</a>
 and installed the tools with brew:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install hugo
-hugo version
-&gt; hugo v0.92.0+extended darwin/amd64 BuildDate<span style="color:#f92672">=</span>unknown
-</code></pre></div><p>I decided to use the &lsquo;docs&rsquo; directory to publish to on github; for some reason
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install hugo
+</span></span><span style="display:flex;"><span>hugo version
+</span></span><span style="display:flex;"><span>&gt; hugo v0.92.0+extended darwin/amd64 BuildDate<span style="color:#f92672">=</span>unknown
+</span></span></code></pre></div><p>I decided to use the &lsquo;docs&rsquo; directory to publish to on github; for some reason
 github only offers two options</p>
 <ul>
 <li><code>/ (root)</code></li>
@@ -193,8 +193,8 @@ github only offers two options</p>
 </ul>
 <p>It feels cleaner to publish to an output directory.</p>
 <p>NOTE: don&rsquo;t forget to</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch .nojekyll &amp; git add .nojekyll
-</code></pre></div><p>in the root directory; this will prevent the GitHub Action from trying to run
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch .nojekyll &amp; git add .nojekyll
+</span></span></code></pre></div><p>in the root directory; this will prevent the GitHub Action from trying to run
 jekyll (This can reduce the build time to a few seconds). As described in this
 <a href="https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/">post</a>
 it must be placed in the document root.</p>
@@ -203,61 +203,61 @@ it must be placed in the document root.</p>
 <ul>
 <li>to build</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo -d ./docs
-git add docs
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo -d ./docs
+</span></span><span style="display:flex;"><span>git add docs
+</span></span></code></pre></div><ul>
 <li>to start a local server on localhost:1313</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo server
-</code></pre></div><p>I like to ensure that the commands are run from the correct directory (in this
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p>I like to ensure that the commands are run from the correct directory (in this
 case its the project-root directory).  So I rolled these commands into bash
 scripts:</p>
 <p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/build-site">build-site</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-
-DOCS_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;docs&#34;</span>
-TGT_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>DOCS_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-
-cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-hugo -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TGT_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-git add <span style="color:#e6db74">${</span>DOCS_DIR<span style="color:#e6db74">}</span>
-</code></pre></div><p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/build-site">serve</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-
-cd <span style="color:#e6db74">&#34;</span>$PROJECT_ROOT<span style="color:#e6db74">&#34;</span>
-hugo server
-</code></pre></div><h2 id="new-post">new-post</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DOCS_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;docs&#34;</span>
+</span></span><span style="display:flex;"><span>TGT_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>DOCS_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>hugo -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TGT_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>git add <span style="color:#e6db74">${</span>DOCS_DIR<span style="color:#e6db74">}</span>
+</span></span></code></pre></div><p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/build-site">serve</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;</span>$PROJECT_ROOT<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><h2 id="new-post">new-post</h2>
 <p>The method for starting a new post also requires some memory; you have to
-invoke the &lsquo;new&rsquo; sub-command and the content org structure:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new content/posts/&lt;post-name&gt;.md
-</code></pre></div><p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/new-post">new-post</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">POST_SLUG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
-
-SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-
-NOW<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%Y-%m-%d&#34;</span><span style="color:#66d9ef">)</span>
-TGT_POST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;content/posts/</span>$NOW<span style="color:#e6db74">-</span>$POST_SLUG<span style="color:#e6db74">.md&#34;</span>
-
-cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-hugo new -v <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TGT_POST<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-</code></pre></div><p>This script automates the prefix, date and file extention to reduce the barrier
+invoke the &rsquo;new&rsquo; sub-command and the content org structure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo new content/posts/&lt;post-name&gt;.md
+</span></span></code></pre></div><p><a href="https://github.com/nckz/nckz.github.io/blob/hugo/bin/new-post">new-post</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>POST_SLUG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>PROJECT_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">&#34;</span>$SWD<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NOW<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%Y-%m-%d&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>TGT_POST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;content/posts/</span>$NOW<span style="color:#e6db74">-</span>$POST_SLUG<span style="color:#e6db74">.md&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROJECT_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>hugo new -v <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TGT_POST<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>This script automates the prefix, date and file extention to reduce the barrier
 for starting new posts.  It takes one argument for the base filename.  The
 verbose switch is used to remind you where to find the files.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/new-post hugo-blog
-&gt; Content <span style="color:#e6db74">&#34;/Users/nick/src/nckz.github.io/content/posts/2022-01-22-hugo-blog.md&#34;</span> created
-</code></pre></div><h1 id="finalize">Finalize</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bin/new-post hugo-blog
+</span></span><span style="display:flex;"><span>&gt; Content <span style="color:#e6db74">&#34;/Users/nick/src/nckz.github.io/content/posts/2022-01-22-hugo-blog.md&#34;</span> created
+</span></span></code></pre></div><h1 id="finalize">Finalize</h1>
 <p>There are a few other instructions (not listed here) that deal with theme-ing
 and configuration.  The things that caused more time than necessary were the
 new instructions on linking DNS and setting up HTTPS in GitHub.</p>
 <p>From the GitHub <code>Settings-&gt;Pages</code> menu, in the target repository, you can
 automatically enter the CNAME in a UI field which will write a file in your
 repo at the location that corresponds with your site&rsquo;s root, e.g.:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat docs/CNAME
-&gt;toughiculties.com
-</code></pre></div><p>You&rsquo;ll have to make an A record with one of the IP addresses listed here:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat docs/CNAME
+</span></span><span style="display:flex;"><span>&gt;toughiculties.com
+</span></span></code></pre></div><p>You&rsquo;ll have to make an A record with one of the IP addresses listed here:
 <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain">Managing a custom domain&hellip;</a>.</p>
 <p>It&rsquo;s also important to make sure that all configured urls have &lsquo;HTTPS&rsquo; i.e.
 the main configuration file
@@ -313,6 +313,8 @@ or in the configs will then be made relative to <code>/images</code>.</p>
   
   
   <nav class="post-nav">
+    
+    <a class="prev" href="https://toughiculties.com/posts/2022-09-10_pyscript/"><span>←</span><span>PyScript</span></a>
      
     <a class="next" href="https://toughiculties.com/posts/2016-07-21_shrinking_vmware_vms/"><span>Shrinking VMware VMs with Fusion</span><span>→</span></a>
     

@@ -56,7 +56,7 @@
   <link rel="apple-touch-icon" href="https://toughiculties.com/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.1" />
+  <meta name="generator" content="Hugo 0.101.0" />
 
   
   
@@ -194,10 +194,10 @@ test pipelines.</p>
 <p>From the instructions on
 <a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-repository.md">gitlab.com</a>,
 run the following commands:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash
-sudo apt-get install gitlab-ci-multi-runner
-sudo gitlab-ci-multi-runner register
-</code></pre></div><p>The runner registration info can be found on under the &lsquo;runners&rsquo; tab from in
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash
+</span></span><span style="display:flex;"><span>sudo apt-get install gitlab-ci-multi-runner
+</span></span><span style="display:flex;"><span>sudo gitlab-ci-multi-runner register
+</span></span></code></pre></div><p>The runner registration info can be found on under the &lsquo;runners&rsquo; tab from in
 the desired project:</p>
 <pre tabindex="0"><code>https://gitlab.com/&lt;group&gt;/&lt;repo&gt;/runners
 </code></pre><p>The &lsquo;Shared runners&rsquo; option was disabled since they likely don&rsquo;t have the
@@ -223,8 +223,8 @@ shell
 
 The runner should be auto-started.
 </code></pre><p>This can be verified with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ps aux | grep gitlab-runner
-</code></pre></div><p>Which returns something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps aux | grep gitlab-runner
+</span></span></code></pre></div><p>Which returns something like:</p>
 <pre tabindex="0"><code>root      4355  0.1  0.3  60016 13352 ?        Ssl  10:45   0:01 /usr/bin/gitlab-ci-multi-runner run --working-directory /home/gitlab-runner --config /etc/gitlab-runner/config.toml --service gitlab-runner --syslog --user gitlab-runner
 </code></pre><h4 id="windows">Windows</h4>
 <p>The <code>gitlab-ci-multi-runner</code> command can install itself as a service, however,

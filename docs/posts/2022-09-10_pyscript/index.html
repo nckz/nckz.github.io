@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>PyScript - Toughiculties</title>
+
+  
+  
+  <meta name="description" content="Some examples of PyScript." />
+  <meta name="author" content="Nicholas Zwart" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://toughiculties.com/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://toughiculties.com/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://toughiculties.com/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://toughiculties.com/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://toughiculties.com/github.svg" />
+  
+
+  
+  <link rel="icon" href="https://toughiculties.com/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://toughiculties.com/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  
+
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-76185171-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-76185171-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+  
+  
+  
+  <meta property="og:title" content="PyScript" />
+<meta property="og:description" content="Some examples of PyScript." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughiculties.com/posts/2022-09-10_pyscript/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-10T23:53:20+00:00" />
+<meta property="article:modified_time" content="2022-09-10T23:53:20+00:00" />
+
+
+  
+  <meta itemprop="name" content="PyScript">
+<meta itemprop="description" content="Some examples of PyScript."><meta itemprop="datePublished" content="2022-09-10T23:53:20+00:00" />
+<meta itemprop="dateModified" content="2022-09-10T23:53:20+00:00" />
+<meta itemprop="wordCount" content="172">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PyScript"/>
+<meta name="twitter:description" content="Some examples of PyScript."/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="false">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://toughiculties.com/">Toughiculties</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/nckz"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Sep 10, 2022</time>
+      
+      <span>Nicholas Zwart</span>
+      
+    </p>
+    <h1>PyScript</h1>
+  </header>
+  <section class="post-content"><p>Looking to embed some python in a client side application.</p>
+<html>
+
+<link rel="stylesheet"
+	href="https://pyscript.net/alpha/pyscript.css" />
+<script defer
+	src="https://pyscript.net/alpha/pyscript.js">
+</script>
+
+<div class="jumbotron">
+   <h1>Weather Data</h1>
+   <p class="lead">
+      Some graphs about the weather in London in 2020
+   </p>
+</div>
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1">
+      <select class="form-control" id="select">
+         <option value="Tmax">Maximum Temperature</option>
+         <option value="Tmin">Minimum Temperature</option>
+         <option value="Sun">Sun</option>
+         <option value="Rain">Rain</option>
+      </select>
+   </div>
+</div>
+<div class="row">
+   <div class="col-sm-6 p-2 shadow ml-4 mr-4 mb-4 bg-white rounded">
+      <div id="chart1"></div>
+   </div>
+</div>
+
+<py-env>
+  - matplotlib
+  - pandas
+  - seaborn
+</py-env>
+
+<py-script>
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Get the data
+from pyodide.http import open_url
+url = 'https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv'
+url_content = open_url(url)
+df = pd.read_csv(url_content)
+
+# filter the data for the year 2020
+df = df[df['Year']==2020]
+
+# Function to plot the chart
+def plot(chart):
+  fig, ax = plt.subplots()
+  sns.lineplot(y=chart, x="Month", data=df, ax=ax)
+  assert fig is not None
+  pyscript.write("chart1",fig)
+
+# Set up a proxy to be called when a 'change'
+# event occurs in the select control
+from js import document
+from pyodide import create_proxy
+
+# Read the value of the select control
+# and call 'plot'
+def selectChange(event):
+   choice = document.getElementById("select").value
+   plot(choice)
+
+# set the proxy
+def setup():
+   # Create a JsProxy for the callback function
+   change_proxy = create_proxy(selectChange)
+   e = document.getElementById("select")
+   e.addEventListener("change", change_proxy)
+setup()
+
+# Intitially call plot with 'Tmax'
+plot('Tmax')
+</py-script>
+
+</html>
+
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://toughiculties.com/posts/2022-01-22-starting-new-hugo-blog/"><span>Hugo Blog</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+  <div id="disqus_thread" class="post-comments"></div>
+  <script>
+    var disqusShortname = 'nckz';
+    var script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script>
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2022 <a href="https://toughiculties.com/">Toughiculties</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>

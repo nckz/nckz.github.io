@@ -1,0 +1,92 @@
+<html>
+
+<link rel="stylesheet"
+    href="https://pyscript.net/alpha/pyscript.css" />
+<script defer
+    src="https://pyscript.net/alpha/pyscript.js">
+</script>
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+<div id="plotly-demo">
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1 shadow bg-white rounded">
+      <select class="form-control" style="color:black" id="select-plotly">
+         <option value="Tmax">Maximum Temperature</option>
+         <option value="Tmin">Minimum Temperature</option>
+         <option value="Sun">Sun</option>
+         <option value="Rain">Rain</option>
+      </select>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1 shadow bg-white rounded">
+      <div id="chart-plotly"></div>
+   </div>
+</div>
+</div>
+
+<py-env>
+  - matplotlib
+  - pandas
+  - seaborn
+  - plotly
+</py-env>
+
+<script type='text/javascript'>
+    function plot_plotly(graph, chart) {
+        var figure = JSON.parse(graph)
+        Plotly.newPlot(chart, figure, {});
+    }
+</script>
+
+<py-script>
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly
+import plotly.express as px
+import json
+import js
+
+# Get the data
+from pyodide.http import open_url
+url = 'https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv'
+url_content = open_url(url)
+df = pd.read_csv(url_content)
+
+# filter the data for the year 2020
+df = df[df['Year']==2020]
+
+# Function to plot the chart
+def plot_plotly(chart):
+    fig = px.line(df,
+    x="Month", y=chart,
+    height=400)
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    js.plot_plotly(graphJSON,"chart-plotly")
+
+# Set up a proxy to be called when a 'change'
+# event occurs in the select control
+from js import document
+from pyodide import create_proxy
+
+# Read the value of the select control
+# and call 'plot'
+def selectChange_plotly(event):
+   choice = document.getElementById("select-plotly").value
+   plot_plotly(choice)
+
+# set the proxy
+def setup_plotly():
+   # Create a JsProxy for the callback function
+   change_proxy = create_proxy(selectChange_plotly)
+   e = document.getElementById("select-plotly")
+   e.addEventListener("change", change_proxy)
+setup_plotly()
+
+# Intitially call plot with 'Tmax'
+plot_plotly('Tmax')
+</py-script>
+</html>
