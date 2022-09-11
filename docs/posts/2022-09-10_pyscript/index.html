@@ -105,7 +105,7 @@ if (!doNotTrack) {
   <meta itemprop="name" content="PyScript; Scientific Edge Computing Soon">
 <meta itemprop="description" content="Some examples of PyScript implementations running Python client-side."><meta itemprop="datePublished" content="2022-09-10T23:53:20+00:00" />
 <meta itemprop="dateModified" content="2022-09-10T23:53:20+00:00" />
-<meta itemprop="wordCount" content="463">
+<meta itemprop="wordCount" content="775">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -198,12 +198,181 @@ They incorporate some essential tools like tabular data objects with
 <a href="https://towardsdatascience.com/create-an-interactive-web-app-with-pyscript-and-pandas-3918ad2dada1">Create an Interactive Web App with Pyscript</a>.</p>
 <h3 id="weather-data">Weather Data</h3>
 <p>Some graphs about the weather in London in 2020.
-{ {&lt; pyscript_pandas_app &gt;} }</p>
+<html>
+
+<link rel="stylesheet"
+	href="https://pyscript.net/alpha/pyscript.css" />
+<script defer
+	src="https://pyscript.net/alpha/pyscript.js">
+</script>
+
+<div id="matplotlib-demo">
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1 shadow bg-white rounded">
+      <select class="form-control" style="color:black" id="select-matplotlib">
+         <option value="Tmax">Maximum Temperature</option>
+         <option value="Tmin">Minimum Temperature</option>
+         <option value="Sun">Sun</option>
+         <option value="Rain">Rain</option>
+      </select>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1 shadow bg-white rounded">
+      <div id="chart-matplotlib"></div>
+   </div>
+</div>
+</div>
+
+<py-env>
+  - matplotlib
+  - pandas
+  - seaborn
+</py-env>
+
+<py-script>
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Get the data
+from pyodide.http import open_url
+url = 'https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv'
+url_content = open_url(url)
+df = pd.read_csv(url_content)
+
+# filter the data for the year 2020
+df = df[df['Year']==2020]
+
+# Function to plot the chart
+def plot_matplotlib(chart):
+  fig, ax = plt.subplots()
+  sns.lineplot(y=chart, x="Month", data=df, ax=ax)
+  assert fig is not None
+  pyscript.write("chart-matplotlib",fig)
+
+# Set up a proxy to be called when a 'change'
+# event occurs in the select control
+from js import document
+from pyodide import create_proxy
+
+# Read the value of the select control
+# and call 'plot'
+def selectChange_matplotlib(event):
+   choice = document.getElementById("select-matplotlib").value
+   plot_matplotlib(choice)
+
+# set the proxy
+def setup_matplotlib():
+   # Create a JsProxy for the callback function
+   change_proxy = create_proxy(selectChange_matplotlib)
+   e = document.getElementById("select-matplotlib")
+   e.addEventListener("change", change_proxy)
+setup_matplotlib()
+
+# Intitially call plot with 'Tmax'
+plot_matplotlib('Tmax')
+</py-script>
+</html>
+</p>
 <h2 id="plotly-and-pandas-example">Plotly and Pandas Example</h2>
 <p>Building on the previous example from <a href="https://medium.com/technofile/how-to-use-ploty-with-pyscript-578d3b287293">How to Use Plotly with PyScript</a>.</p>
 <h3 id="weather-data-1">Weather Data</h3>
 <p>Some graphs about the weather in London in 2020.
-{ {&lt; pyscript_pandas_plotly_app &gt;} }</p>
+<html>
+
+<link rel="stylesheet"
+    href="https://pyscript.net/alpha/pyscript.css" />
+<script defer
+    src="https://pyscript.net/alpha/pyscript.js">
+</script>
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+<div id="plotly-demo">
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1 shadow bg-white rounded">
+      <select class="form-control" style="color:black" id="select-plotly">
+         <option value="Tmax">Maximum Temperature</option>
+         <option value="Tmin">Minimum Temperature</option>
+         <option value="Sun">Sun</option>
+         <option value="Rain">Rain</option>
+      </select>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-4 p-2 mr-4 mb-1 shadow bg-white rounded">
+      <div id="chart-plotly"></div>
+   </div>
+</div>
+</div>
+
+<py-env>
+  - matplotlib
+  - pandas
+  - seaborn
+  - plotly
+</py-env>
+
+<script type='text/javascript'>
+    function plot_plotly(graph, chart) {
+        var figure = JSON.parse(graph)
+        Plotly.newPlot(chart, figure, {});
+    }
+</script>
+
+<py-script>
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly
+import plotly.express as px
+import json
+import js
+
+# Get the data
+from pyodide.http import open_url
+url = 'https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv'
+url_content = open_url(url)
+df = pd.read_csv(url_content)
+
+# filter the data for the year 2020
+df = df[df['Year']==2020]
+
+# Function to plot the chart
+def plot_plotly(chart):
+    fig = px.line(df,
+    x="Month", y=chart)
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    js.plot_plotly(graphJSON,"chart-plotly")
+
+# Set up a proxy to be called when a 'change'
+# event occurs in the select control
+from js import document
+from pyodide import create_proxy
+
+# Read the value of the select control
+# and call 'plot'
+def selectChange_plotly(event):
+   choice = document.getElementById("select-plotly").value
+   plot_plotly(choice)
+
+# set the proxy
+def setup_plotly():
+   # Create a JsProxy for the callback function
+   change_proxy = create_proxy(selectChange_plotly)
+   e = document.getElementById("select-plotly")
+   e.addEventListener("change", change_proxy)
+setup_plotly()
+
+# Intitially call plot with 'Tmax'
+plot_plotly('Tmax')
+</py-script>
+</html>
+</p>
 <h1 id="the-trouble">The Trouble</h1>
 <p>The issues I ran into were not so bad, but, I figured this might help the next
 dev.</p>
@@ -271,13 +440,14 @@ in an exception thrown in <a href="https://pyodide.org/en/stable/">Pyodide</a>. 
 sure why I can&rsquo;t reproduce it now.</p>
 <h2 id="python-interpreter-session">Python Interpreter Session</h2>
 <p>It wasn&rsquo;t obvious to me that successive py-script runs will execute code in the
-same interpreter session. This means that care should be taken when naming
+same interpreter scope/session. This means that care should be taken when naming
 variables and definitions within each script.  For example, the <code>plot</code> command
 was renamed in each script i.e.:</p>
 <ul>
-<li><code>plot_matplotlib</code> in <a href="">pyscript_pandas_app.html</a></li>
-<li><code>plot_plotly</code> in <a href="">pyscript_pandas_plotly_app.html</a></li>
+<li><code>plot_matplotlib</code> in <a href="https://github.com/nckz/nckz.github.io/blob/hugo/layouts/shortcodes/pyscript_pandas_app.html">pyscript_pandas_app.html</a></li>
+<li><code>plot_plotly</code> in <a href="https://github.com/nckz/nckz.github.io/blob/hugo/layouts/shortcodes/pyscript_pandas_plotly_app.html">pyscript_pandas_plotly_app.html</a></li>
 </ul>
+<p>I suppose this should&rsquo;ve been expected since the page is the scope.</p>
 </section>
 
   
