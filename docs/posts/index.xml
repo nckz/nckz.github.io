@@ -9,12 +9,12 @@
     <copyright>Copyright © 2016–2022, Nicholas Zwart; all rights reserved.</copyright>
     <lastBuildDate>Sat, 10 Sep 2022 23:53:20 +0000</lastBuildDate><atom:link href="https://toughiculties.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>PyScript</title>
+      <title>PyScript; Scientific Edge Computing Soon</title>
       <link>https://toughiculties.com/posts/2022-09-10_pyscript/</link>
       <pubDate>Sat, 10 Sep 2022 23:53:20 +0000</pubDate>
       
       <guid>https://toughiculties.com/posts/2022-09-10_pyscript/</guid>
-      <description>Some examples of PyScript.</description>
+      <description>Some examples of PyScript implementations running Python client-side.</description>
     </item>
     
     <item>

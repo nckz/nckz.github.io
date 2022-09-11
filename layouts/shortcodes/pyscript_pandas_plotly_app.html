@@ -62,8 +62,7 @@ df = df[df['Year']==2020]
 # Function to plot the chart
 def plot_plotly(chart):
     fig = px.line(df,
-    x="Month", y=chart,
-    height=400)
+    x="Month", y=chart)
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     js.plot_plotly(graphJSON,"chart-plotly")
 
