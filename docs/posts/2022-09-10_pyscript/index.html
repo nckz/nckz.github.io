@@ -105,7 +105,7 @@ if (!doNotTrack) {
   <meta itemprop="name" content="PyScript; Scientific Edge Computing Soon">
 <meta itemprop="description" content="Some examples of PyScript implementations running Python client-side."><meta itemprop="datePublished" content="2022-09-10T23:53:20+00:00" />
 <meta itemprop="dateModified" content="2022-09-10T23:53:20+00:00" />
-<meta itemprop="wordCount" content="848">
+<meta itemprop="wordCount" content="913">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -377,7 +377,7 @@ plot_plotly('Tmax')
 <p>The issues I ran into were not so bad, but, I figured this might help the next
 dev.</p>
 <h2 id="first-rendering-html">First Rendering HTML</h2>
-<p>I was hoping that the html could be directly injected into the markdown text;
+<p>I was hoping that the HTML could be directly injected into the markdown text;
 this resulted in a few errors due to the markdown processing of the post page.
 The python code would be directly rendered to the page instead of executing
 e.g.</p>
@@ -460,6 +460,12 @@ loading, as shown in the screenshot below.</p>
 <li>Runtime created&hellip;</li>
 <li>Initializing components&hellip;</li>
 </ul>
+<p>Embedding the Python code into Hugo &lsquo;shortcodes&rsquo; was definitely the right
+workflow. I&rsquo;d like to inject as little Python code as possible into HTML; this
+makes linting and formatting much easier.  The current workflow seems to be
+reliant on pure python modules from <a href="https://pypi.org">PyPi</a> for projects with
+any substantial complexity.  I think a workflow that incorporates pip installs
+directly from GitHub, would make this ideal.</p>
 </section>
 
   
